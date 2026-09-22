@@ -156,18 +156,27 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nav-burger{display:none;margin-left:auto;width:42px;height:42px;border:0;background:none;cursor:pointer;padding:0;place-items:center}
 .nav-burger span{display:block;width:20px;height:1.6px;background:#fff;margin:4.5px auto;transition:background .3s var(--ease),transform .3s var(--ease),opacity .2s}
 .nav.is-stuck .nav-burger span{background:var(--black)}
-.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+/* 10.6px = distancia real entre los centros de las barras (1.6 de alto + 9 de margen),
+   que es lo que hay que recorrer para que se crucen en aspa */
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(10.6px) rotate(45deg)}
 .nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-10.6px) rotate(-45deg)}
 
 @media (max-width:1040px){
   .nav-links{
     position:fixed;inset:66px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
-    background:rgba(255,255,255,.99);padding:6px var(--pad) 22px;border-bottom:1px solid var(--rule);
+    /* opaco de verdad: con fondo translúcido el hero se leía a través del menú */
+    background:var(--white);backdrop-filter:none;
+    padding:6px var(--pad) 22px;border-bottom:1px solid var(--rule);
     max-height:calc(100svh - 66px);overflow-y:auto;
-    transform:translateY(-10px);opacity:0;pointer-events:none;transition:.26s var(--ease)
+    transform:translateY(-10px);opacity:0;visibility:hidden;pointer-events:none;
+    transition:transform .26s var(--ease),opacity .26s var(--ease),visibility 0s linear .26s
   }
-  .nav-links.open{transform:none;opacity:1;pointer-events:auto;box-shadow:0 18px 40px rgba(0,0,0,.14)}
+  .nav-links.open{
+    transform:none;opacity:1;visibility:visible;pointer-events:auto;
+    box-shadow:0 18px 40px rgba(0,0,0,.14);
+    transition:transform .26s var(--ease),opacity .26s var(--ease),visibility 0s
+  }
   .nav-links a{color:var(--ink) !important;padding:14px 2px;border-bottom:1px solid var(--rule);font-size:1rem}
   .nav-cta{text-align:center;margin-top:14px;border-bottom:0 !important;color:#fff !important;padding:14px 18px}
   .nav-burger{display:grid}
@@ -296,8 +305,11 @@ section{position:relative}
 
 /* ---------- método: gráfico interactivo por scroll ---------- */
 .fases{position:relative;margin-top:clamp(20px,3vw,32px)}
-.fases-rail{position:absolute;left:0;right:0;top:15px;height:2px;background:var(--gray-xlt);border-radius:2px;overflow:hidden}
-.fases-fill{height:100%;width:calc(var(--p,0) * 100%);background:var(--accent);border-radius:2px;will-change:width}
+/* la geometría exacta del riel la fija el JS a partir de los nodos, para que la
+   línea empiece en el primer punto y termine en el último, sin cola sobrante.
+   Estos valores son el respaldo si el JS no llega a correr. */
+.fases-rail{position:absolute;left:8px;right:8px;top:15px;height:2px;background:var(--gray-xlt);border-radius:2px;overflow:hidden}
+.fases-fill{height:100%;width:0;background:var(--accent);border-radius:2px;will-change:width,height}
 .fases-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,30px);position:relative}
 .fase{padding-top:44px;position:relative;opacity:.45;transition:opacity .45s var(--ease)}
 .fase.on{opacity:1}
@@ -314,8 +326,8 @@ section{position:relative}
 .fase h4{font-size:1.06rem;margin-bottom:8px;letter-spacing:-.02em}
 .fase p{font-size:.9rem;color:var(--gray);line-height:1.62}
 @media (max-width:860px){
-  .fases-rail{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto}
-  .fases-fill{width:100%;height:calc(var(--p,0) * 100%)}
+  .fases-rail{left:7px;right:auto;top:11px;bottom:11px;width:2px;height:auto}
+  .fases-fill{width:100%;height:0}
   .fases-grid{grid-template-columns:1fr;gap:26px}
   .fase{padding-top:0;padding-left:38px}
   .fase-dot{top:3px;left:0}
@@ -1170,15 +1182,60 @@ section{position:relative}
   /* ---------- método: gráfico que avanza con el scroll ---------- */
   var fasesEl = $("#fases"), fill = $("#fasesFill");
   var fases = $$(".fase", fasesEl);
+  var rail = fill ? fill.parentNode : null;
+  var vertical = false, lastP = 0;
+
+  /* El riel se mide sobre los nodos reales: arranca en el centro del primer punto
+     y termina en el del último, así no queda cola gris sobrante a la derecha
+     (ni por debajo, en móvil). Se recalcula al cambiar el tamaño. */
+  function sizeRail(){
+    if (!fasesEl || !rail || fases.length < 2) return;
+    var dots = $$(".fase-dot", fasesEl);
+    if (dots.length < 2) return;
+
+    var box = fasesEl.getBoundingClientRect();
+    var a = dots[0].getBoundingClientRect();
+    var b = dots[dots.length - 1].getBoundingClientRect();
+    vertical = window.matchMedia("(max-width:860px)").matches;
+
+    if (vertical){
+      var top = a.top - box.top + a.height / 2;
+      var bot = b.top - box.top + b.height / 2;
+      rail.style.left   = (a.left - box.left + a.width / 2 - 1) + "px";
+      rail.style.right  = "auto";
+      rail.style.top    = top + "px";
+      rail.style.bottom = "auto";
+      rail.style.width  = "2px";
+      rail.style.height = Math.max(0, bot - top) + "px";
+    } else {
+      var l = a.left - box.left + a.width / 2;
+      var r = b.left - box.left + b.width / 2;
+      rail.style.top    = (a.top - box.top + a.height / 2 - 1) + "px";
+      rail.style.bottom = "auto";
+      rail.style.left   = l + "px";
+      rail.style.right  = "auto";
+      rail.style.height = "2px";
+      rail.style.width  = Math.max(0, r - l) + "px";
+    }
+    setProgress(lastP);
+  }
 
   function setProgress(p){
     if (!fill) return;
-    fill.style.setProperty("--p", p);
+    lastP = p;
+    if (vertical){ fill.style.height = (p * 100) + "%"; fill.style.width = "100%"; }
+    else         { fill.style.width  = (p * 100) + "%"; fill.style.height = "100%"; }
     fases.forEach(function(f, i){
-      var at = fases.length > 1 ? (i / (fases.length - 1)) * .88 : 0;
+      var at = fases.length > 1 ? (i / (fases.length - 1)) * .94 : 0;
       f.classList.toggle("on", p >= at - .02);
     });
   }
+
+  var rTick;
+  window.addEventListener("resize", function(){
+    clearTimeout(rTick);
+    rTick = setTimeout(sizeRail, 140);
+  }, {passive:true});
 
   function fasesFallback(){
     if (!fasesEl || !("IntersectionObserver" in window)){ setProgress(1); return; }
@@ -1195,6 +1252,7 @@ section{position:relative}
   }
 
   window.addEventListener("load", function(){
+    sizeRail();
     if (reduce){ setProgress(1); return; }
 
     if (window.gsap && window.ScrollTrigger){
@@ -1206,6 +1264,7 @@ section{position:relative}
           start: "top 80%",
           end: "bottom 65%",
           scrub: .45,
+          onRefresh: sizeRail,
           onUpdate: function(self){ setProgress(self.progress); }
         });
       }
