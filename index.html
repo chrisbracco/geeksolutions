@@ -228,6 +228,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- secciones ---------- */
 section{position:relative}
+/* la barra superior es fija: sin este margen el titular de cada sección
+   queda escondido debajo al llegar por un enlace del menú */
+section[id],div[id]{scroll-margin-top:86px}
 .sec{padding:clamp(66px,9vw,126px) 0;content-visibility:auto;contain-intrinsic-size:auto 900px}
 .sec-alt{background:var(--off-white)}
 .sec-dark{background:var(--black);color:#fff}

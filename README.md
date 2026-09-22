@@ -56,13 +56,32 @@ formulario, listeners de scroll con rAF throttle y `passive:true`.
 
 ```
 index.html              todo el sitio
-assets/                 imágenes (recomprimidas, -80% vs. el original)
-  project/              14 proyectos
+productos.json          catálogo de la tienda (lo genera tools/sync_tienda.py)
+tools/sync_tienda.py    lee ec.geeksolutions.com.ve y regenera productos.json
+assets/                 imágenes (recomprimidas, -85% vs. el original)
+  logos/                5 logos de cliente
+  project/              14 proyectos, todos 660x440 (3:2)
 docs/mapeo-auditoria.md el mapeo completo de las 3 fuentes + los 18 defectos detectados
 .github/workflows/      deploy automático a GitHub Pages al hacer push a main
 ```
 
-Secciones: `#top` · `#servicios` · `#arquitectura` · `#metodo` · `#proyectos` · `#clientes` · `#nosotros` · `#checklist` · `#contacto`
+Secciones: `#top` · `#servicios` · `#arquitectura` · `#metodo` · `#proyectos` · `#tienda` · `#clientes` · `#nosotros` · `#checklist` · `#contacto`
+
+### La tienda vive dentro de la página
+
+El botón «Tienda» no expulsa al visitante. La sección `#tienda` dibuja el catálogo con
+el diseño de este sitio a partir de `productos.json`, y sólo al pulsar «ver producto» se
+pasa a la ficha en `ec.geeksolutions.com.ve`, que es donde se cobra.
+
+Para refrescar el catálogo:
+
+```
+py tools/sync_tienda.py          # sincroniza
+py tools/sync_tienda.py --dry    # sólo muestra lo que encontró
+```
+
+Si la tienda no responde el script no toca `productos.json` y sale con código 1.
+Con el catálogo vacío la sección muestra un estado de cortesía con botón de cotización.
 
 ---
 
@@ -95,8 +114,11 @@ El detalle completo está en `docs/mapeo-auditoria.md`. Los de mayor impacto:
 | 2 | **Access key de Web3Forms.** En `index.html`, constante `WEB3FORMS_KEY` (vacía). Mientras esté vacía los formularios abren WhatsApp con el mensaje ya redactado — no se pierde ningún lead, pero no llega copia al correo. Son 30 segundos en web3forms.com. | — |
 | 3 | **Escribir el checklist de 7 días.** La sección lo promete y hoy no existe el PDF. | Contenido |
 | 4 | **GA4 `G-8Z63VGX2M4`** existe pero faltaba en el home del sitio viejo. No se incluyó aquí todavía: decidir si entra y con qué aviso de cookies. | Amílcar |
-| 5 | Confirmar con Amílcar que los 5 clientes nombrados (NAVIBUS, LD HOTELES, BT TRAVEL, SAMBIL, GRUPO LEIROS) autorizan seguir apareciendo. | Amílcar |
+| 5 | Confirmar con Amílcar que los 5 clientes nombrados (Navibus, LD Palm Beach, BT Travel, Sambil Margarita, Grupo Leiros) autorizan seguir apareciendo. | Amílcar |
 | 6 | Foto propia para el hero. La actual es la `carousel-1.jpg` del sitio original. | Amílcar |
+| 7 | **La tienda `ec.geeksolutions.com.ve` devuelve 522** (Cloudflare no alcanza el origen). Estuvo en línea a las 21:15 del 21-sep y cayó poco después. Mientras siga así el catálogo va vacío. Cuando vuelva: `py tools/sync_tienda.py`. | Amílcar |
+| 8 | Retratos de Christian Bracconi y Juan Matute. Ahora salen con iniciales. | — |
+| 9 | Confirmar los nombres de dos clientes: el logo que el sitio viejo llamaba «LD Hoteles» dice **LD Palm Beach**, y el de Sambil es **Sambil Margarita**. Se usó lo que dice el logo. | Amílcar |
 
 `canonical` y `og:url` apuntan a `www.geeksolutions.com.ve` a propósito: mientras esto viva
 en GitHub Pages como vista previa, no debe competir en Google con el sitio real.
