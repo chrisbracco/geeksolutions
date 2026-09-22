@@ -1,0 +1,19 @@
+# sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# editores
+.vscode/
+.idea/
+*.swp
+
+# respaldos y temporales
+*.bak
+*.tmp
+*~
+
+# nunca publicar
+/private/
+/clientes/
+.env
