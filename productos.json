@@ -1,0 +1,7 @@
+{
+  "actualizado": null,
+  "origen": "https://ec.geeksolutions.com.ve/shop",
+  "nota": "Generado por tools/sync_tienda.py. Al 2026-09-21 la tienda respondia 522 (origen caido), por eso el catalogo esta vacio. Ejecutar 'py tools/sync_tienda.py' cuando vuelva a estar en linea.",
+  "categorias": [],
+  "productos": []
+}
