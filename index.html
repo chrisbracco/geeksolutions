@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com">
 
 <title>Geek Solutions — Infraestructura, nube y estructura operativa · Porlamar, Venezuela</title>
 <meta name="description" content="Geek Solutions: 15 años montando y sosteniendo infraestructura tecnológica en Venezuela. Nube AWS y Azure, servidores, redes MikroTik y Cisco, correo corporativo, Microsoft 365, bases de datos, videovigilancia y ciberseguridad. Además, estructura operativa, indicadores de gestión y automatización. Porlamar, Isla de Margarita.">
@@ -566,6 +566,84 @@ section[id],div[id]{scroll-margin-top:86px}
   .shop-cats::-webkit-scrollbar{display:none}
   .chip{flex:none}
 }
+
+/* ============================================================
+   Capa de movimiento (28-sep). Mecánica inspirada en sitios de
+   scroll narrativo, con la línea gráfica de Geek: cubo 3D en CSS,
+   titulares por palabras, contadores, sección fijada con recorrido
+   horizontal y scroll suave. Sólo escritorio; en móvil y con
+   "reducir movimiento" todo queda estático.
+   ============================================================ */
+html.lenis,html.lenis body{height:auto}
+html.lenis{scroll-behavior:auto}
+.lenis.lenis-stopped{overflow:hidden}
+/* con la capa activa las secciones se miden de verdad: content-visibility
+   adivina alturas y descuadra los disparadores del scroll */
+html.fx .sec{content-visibility:visible}
+
+/* cubo */
+.cube-scene{display:none}
+@media (min-width:1026px){
+  .cube-scene{
+    --s:clamp(170px,17vw,260px);
+    display:block;position:absolute;z-index:-1;top:50%;
+    right:max(5vw,calc((100vw - var(--maxw)) / 2 + 40px));
+    width:var(--s);height:var(--s);margin-top:calc(var(--s) / -2 - 30px);
+    perspective:1100px;pointer-events:none
+  }
+  .cube-spin{position:absolute;inset:0;transform-style:preserve-3d}
+  .cube{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-24deg) rotateY(36deg)}
+  .cube i{
+    position:absolute;inset:0;
+    border:1px solid rgba(38,212,140,.5);
+    background:linear-gradient(140deg,rgba(38,212,140,.16),rgba(38,212,140,.015) 60%);
+    box-shadow:inset 0 0 38px rgba(38,212,140,.1)
+  }
+  .cube i:nth-child(1){transform:translateZ(calc(var(--s) / 2))}
+  .cube i:nth-child(2){transform:rotateY(180deg) translateZ(calc(var(--s) / 2))}
+  .cube i:nth-child(3){transform:rotateY(90deg) translateZ(calc(var(--s) / 2))}
+  .cube i:nth-child(4){transform:rotateY(-90deg) translateZ(calc(var(--s) / 2))}
+  .cube i:nth-child(5){transform:rotateX(90deg) translateZ(calc(var(--s) / 2))}
+  .cube i:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--s) / 2))}
+  .cube--in{inset:31%;--s:calc(clamp(170px,17vw,260px) * .38)}
+  .cube--in i{background:rgba(38,212,140,.42);border-color:rgba(38,212,140,.9);box-shadow:0 0 24px rgba(38,212,140,.35)}
+  .cube-glow{position:absolute;inset:-60%;background:radial-gradient(circle,rgba(38,212,140,.22),transparent 60%);filter:blur(10px)}
+  .hero h1{max-width:15ch}
+}
+
+/* titulares por palabra: SplitText envuelve cada palabra */
+.split-w{display:inline-block;will-change:transform,opacity}
+
+/* estructura operativa: en móvil y tabletas queda como antes */
+.arq{display:flex;flex-direction:column}
+.arq-side{display:contents}
+.arq-track{order:2}
+.arq-fine{order:3;margin-top:24px;color:#93a0a7;font-size:.92rem;line-height:1.65;max-width:76ch}
+.arq-bar{display:none}
+
+/* escritorio: columna de texto fija a la izquierda y los 4 niveles
+   pasando en horizontal mientras la sección está fijada */
+#arquitectura.h-mode{padding:0;overflow:hidden}
+#arquitectura.h-mode .arq{
+  display:grid;grid-template-columns:minmax(320px,.8fr) 1.6fr;gap:clamp(36px,4vw,64px);
+  align-items:center;height:100vh;max-width:none;
+  padding-left:max(var(--pad),calc((100vw - var(--maxw)) / 2 + var(--pad)));padding-right:0
+}
+#arquitectura.h-mode .arq-side{display:block;position:relative;z-index:2}
+/* las fichas se deslizan por detrás de la columna de texto: el fondo cubre
+   desde el borde izquierdo de la pantalla y termina en un degradado */
+#arquitectura.h-mode .arq-side::before{content:"";position:absolute;z-index:-1;top:-100vh;bottom:-100vh;left:-100vw;right:calc(clamp(36px,4vw,64px) * -.5);background:var(--black)}
+#arquitectura.h-mode .arq-side::after{content:"";position:absolute;z-index:-1;top:-100vh;bottom:-100vh;right:calc(clamp(36px,4vw,64px) * -.5 - 70px);width:70px;background:linear-gradient(90deg,var(--black),rgba(14,17,19,0))}
+#arquitectura.h-mode .sec-head{margin-bottom:22px}
+#arquitectura.h-mode .sec-head h2{font-size:clamp(1.8rem,2.9vw,2.6rem)}
+#arquitectura.h-mode .arq-fine{margin-top:0;font-size:.86rem;max-width:44ch}
+#arquitectura.h-mode .arq-bar{display:block;height:2px;border-radius:2px;background:var(--rule-dk);margin-top:28px;max-width:44ch;overflow:hidden}
+#arquitectura.h-mode .arq-bar i{display:block;height:100%;background:var(--accent-bright);transform:scaleX(0);transform-origin:left}
+#arquitectura.h-mode .arq-track{overflow:visible;min-width:0}
+#arquitectura.h-mode .lvl-grid{display:flex;gap:18px;width:max-content;will-change:transform}
+#arquitectura.h-mode .lvl{width:clamp(340px,27vw,410px);flex:none}
+#arquitectura.h-mode .arq-fine{order:0}
+
 /* ---------- ajustes móviles ---------- */
 @media (max-width:900px){
   .nav.is-stuck{backdrop-filter:none;background:rgba(255,255,255,.98)}
@@ -610,6 +688,14 @@ section[id],div[id]{scroll-margin-top:86px}
 <!-- ================= hero ================= -->
 <section class="hero" id="top">
   <div class="hero-bg" aria-hidden="true"></div>
+  <!-- cubo en CSS 3D, sin WebGL ni imágenes: gira solo y responde al scroll -->
+  <div class="cube-scene" id="cube" aria-hidden="true">
+    <div class="cube-glow"></div>
+    <div class="cube-spin">
+      <div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="cube cube--in"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
   <div class="hero-in">
     <span class="label">Porlamar · Nueva Esparta · Venezuela</span>
     <h1>Su operación creció más rápido que su <em>infraestructura</em>.</h1>
@@ -622,7 +708,7 @@ section[id],div[id]{scroll-margin-top:86px}
       <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
     </div>
     <div class="hero-meta">
-      <div><b>15+</b><span>años de trayectoria</span></div>
+      <div><b data-count>15+</b><span>años de trayectoria</span></div>
       <div><b>AWS · Azure</b><span>arquitectura en nube</span></div>
       <div><b>CCNP · MTCRE</b><span>certificaciones de red</span></div>
       <div><b>Margarita</b><span>y toda Venezuela</span></div>
@@ -725,13 +811,17 @@ section[id],div[id]{scroll-margin-top:86px}
 
 <!-- ================= estructura operativa ================= -->
 <section class="sec sec-dark" id="arquitectura">
-  <div class="wrap">
+  <div class="wrap arq">
+    <div class="arq-side">
     <div class="sec-head rv">
       <span class="label">Estructura operativa</span>
       <h2>Cuando el problema no es el equipo, es que los sistemas no se hablan</h2>
       <p>Hay empresas cuya infraestructura está sana y aun así el gerente pasa el día persiguiendo datos entre planillas. Eso no se arregla comprando servidores: se arregla ordenando el flujo. Cuatro puntos de entrada, según dónde esté hoy.</p>
     </div>
+    <div class="arq-bar" aria-hidden="true"><i id="arqBar"></i></div>
+    </div>
 
+    <div class="arq-track" id="arqTrack">
     <div class="lvl-grid rail rv">
       <article class="lvl">
         <span class="lvl-tag">Punto de entrada</span>
@@ -786,12 +876,14 @@ section[id],div[id]{scroll-margin-top:86px}
           <li>Tablero de avance por área, estado y dependencias con sistemas</li>
           <li>Acompañamiento para automatizar de verdad, no sólo documentar</li>
         </ul>
-        <p class="lvl-proof">En marcha hoy en una cadena de retail: <b>49 requerimientos</b> levantados en <b>13 áreas</b>, 62 % de avance y <b>117 horas por semana</b> devueltas al equipo — 29 medidas sobre proceso real y 88 estimadas.</p>
+        <p class="lvl-proof">En marcha hoy en una cadena de retail: <b data-count>49 requerimientos</b> levantados en <b data-count>13 áreas</b>, <span data-count>62 %</span> de avance y <b data-count>117 horas por semana</b> devueltas al equipo — 29 medidas sobre proceso real y 88 estimadas.</p>
         <a class="btn btn-solid" href="#contacto" data-svc="Programa de citizen development">Solicitar propuesta</a>
       </article>
     </div>
 
-    <p class="rv" style="margin-top:24px;color:#93a0a7;font-size:.92rem;line-height:1.65;max-width:76ch">
+    </div>
+
+    <p class="arq-fine rv">
       Cada propuesta se cotiza sobre el alcance real. Licencias, interfaces de terceros y consumo de nube van por presupuesto aparte y se detallan antes de firmar.
     </p>
   </div>
@@ -1150,6 +1242,9 @@ section[id],div[id]{scroll-margin-top:86px}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/SplitText.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrambleTextPlugin.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js" defer></script>
 
 <script>
 (function(){
@@ -1344,10 +1439,148 @@ section[id],div[id]{scroll-margin-top:86px}
           opacity: 0, y: 16, duration: .7, stagger: .09, ease: "power2.out", delay: .25
         });
       }
+      motion();
     } else {
       fasesFallback();
     }
   });
+
+
+  /* ---------- capa de movimiento (escritorio) ---------- */
+  function motion(){
+    var desk = window.matchMedia("(min-width:1026px) and (hover:hover) and (pointer:fine)").matches;
+    if (!desk || !window.gsap || !window.ScrollTrigger) return;
+    document.documentElement.classList.add("fx");
+    if (window.SplitText) gsap.registerPlugin(SplitText);
+    if (window.ScrambleTextPlugin) gsap.registerPlugin(ScrambleTextPlugin);
+
+    /* scroll suave: inercia de 1,1 s, sincronizado con ScrollTrigger */
+    var lenis = null;
+    if (window.Lenis){
+      lenis = new Lenis({duration:1.1, smoothWheel:true});
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+      $$('a[href^="#"]').forEach(function(a){
+        a.addEventListener("click", function(e){
+          var id = a.getAttribute("href");
+          if (id.length < 2) return;
+          var el = $(id);
+          if (!el) return;
+          e.preventDefault();
+          lenis.scrollTo(el, {offset:-80, duration:1.6, easing:function(x){ return 1 - Math.pow(1 - x, 4); }});
+        });
+      });
+    }
+
+    /* cubo: giro continuo lento + inclinación y salida con el scroll */
+    var spin = $(".cube-spin");
+    if (spin){
+      gsap.to(spin, {rotationY:360, duration:28, repeat:-1, ease:"none"});
+      gsap.to(".cube--in", {rotationX:"+=360", rotationY:"-=360", duration:18, repeat:-1, ease:"none"});
+      gsap.to("#cube", {
+        yPercent:55, rotationZ:18, scale:.72, opacity:0, ease:"none",
+        scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:.6}
+      });
+      gsap.from("#cube", {opacity:0, scale:.6, rotationX:-40, duration:1.6, ease:"power3.out", delay:.2});
+    }
+
+    /* hero: el titular entra por palabras al cargar */
+    if (window.SplitText){
+      var h1 = new SplitText(".hero h1", {type:"words", wordsClass:"split-w"});
+      gsap.from(h1.words, {opacity:0, y:34, rotationX:-35, transformOrigin:"50% 100%", duration:1.1, stagger:.06, ease:"power4.out", delay:.1});
+
+      /* resto de titulares: por palabras al entrar en pantalla */
+      $$(".sec-head h2, .ckl-head h2").forEach(function(h){
+        var s = new SplitText(h, {type:"words", wordsClass:"split-w"});
+        gsap.from(s.words, {
+          opacity:0, x:-18, y:22, duration:1.2, stagger:.045, ease:"power4.out",
+          scrollTrigger:{trigger:h, start:"top 86%", toggleActions:"play none none none"}
+        });
+      });
+    }
+
+    /* contadores: cuentan desde cero la primera vez que se ven */
+    $$("[data-count]").forEach(function(el){
+      var m = el.textContent.match(/^(\D*?)(\d[\d.,]*)(.*)$/);
+      if (!m) return;
+      var end = parseFloat(m[2].replace(/\./g,"").replace(",", ".")), o = {v:0};
+      el.textContent = m[1] + "0" + m[3];
+      gsap.to(o, {
+        v:end, duration:2.2, ease:"power3.out",
+        onUpdate:function(){ el.textContent = m[1] + Math.round(o.v).toLocaleString("es-VE") + m[3]; },
+        scrollTrigger:{trigger:el, start:"top 92%", once:true}
+      });
+    });
+
+    /* menú: las letras se revuelven y se reacomodan al pasar el mouse */
+    if (window.ScrambleTextPlugin){
+      $$(".nav-links a:not(.nav-cta)").forEach(function(a){
+        var txt = a.textContent;
+        a.addEventListener("mouseenter", function(){
+          gsap.to(a, {duration:.55, scrambleText:{text:txt, chars:"lowerCase", revealDelay:.05, speed:.4}, ease:"power2.out"});
+        });
+      });
+    }
+
+    /* servicios: las fichas suben en cascada según avanza el scroll */
+    $$("#servicios .grid").forEach(function(g){
+      gsap.from($$(".card", g), {
+        opacity:0, y:36, stagger:.08, ease:"power2.out",
+        scrollTrigger:{trigger:g, start:"top 88%", end:"top 45%", scrub:.5}
+      });
+    });
+
+    /* estructura operativa: el panel oscuro crece desde una tarjeta
+       redondeada hasta toda la pantalla, se fija, y los 4 niveles
+       pasan en horizontal con una barra de avance */
+    var arq = $("#arquitectura"), track = $("#arqTrack"), lvl = track && $(".lvl-grid", track);
+    if (arq && lvl && window.innerHeight >= 720){
+      arq.classList.add("h-mode");
+      /* la entrada .rv deja translateY(20px) y GSAP lo heredaría: se retira aquí */
+      lvl.classList.remove("rv"); gsap.set(lvl, {y:0});
+      var fine = $(".arq-fine", arq), side = $(".arq-side", arq);
+      if (fine && side) side.insertBefore(fine, $(".arq-bar", side));
+      var meter = lvl.nextElementSibling;
+      if (meter && meter.classList.contains("rail-meter")) meter.style.display = "none";
+      var dist = function(){ return Math.max(0, lvl.scrollWidth - track.clientWidth + 80); };
+
+      gsap.fromTo(arq, {clipPath:"inset(7% 4% 7% 4% round 32px)"}, {
+        clipPath:"inset(0% 0% 0% 0% round 0px)", ease:"none",
+        scrollTrigger:{trigger:arq, start:"top 95%", end:"top top", scrub:.4}
+      });
+      var tl = gsap.timeline({
+        scrollTrigger:{
+          trigger:arq, start:"top top", end:function(){ return "+=" + (dist() * 1.15); },
+          pin:true, scrub:.5, invalidateOnRefresh:true, anticipatePin:1
+        }
+      });
+      tl.to(lvl, {x:function(){ return -dist(); }, ease:"none"}, 0)
+        .to("#arqBar", {scaleX:1, ease:"none"}, 0);
+      gsap.from($$(".lvl", lvl), {
+        opacity:0, y:50, rotationY:-12, stagger:.12, duration:1, ease:"power3.out",
+        scrollTrigger:{trigger:arq, start:"top 60%"}
+      });
+    }
+
+    /* valores: salen del centro hacia sus columnas */
+    var vals = $$(".vals .val");
+    if (vals.length === 3){
+      gsap.from(vals[0], {xPercent:100, opacity:.3, ease:"power2.out", scrollTrigger:{trigger:".vals", start:"top 95%", end:"top 55%", scrub:.5}});
+      gsap.from(vals[2], {xPercent:-100, opacity:.3, ease:"power2.out", scrollTrigger:{trigger:".vals", start:"top 95%", end:"top 55%", scrub:.5}});
+      gsap.from(vals[1], {scale:.9, opacity:.3, ease:"power2.out", scrollTrigger:{trigger:".vals", start:"top 95%", end:"top 55%", scrub:.5}});
+    }
+
+    /* proyectos: cada foto se destapa de abajo hacia arriba */
+    $$(".proj").forEach(function(p, i){
+      gsap.from(p, {
+        clipPath:"inset(100% 0% 0% 0% round 13px)", duration:1.1, ease:"power3.inOut", delay:(i % 4) * .08,
+        scrollTrigger:{trigger:p, start:"top 90%"}
+      });
+    });
+
+    ScrollTrigger.refresh();
+  }
 
   /* ---------- tienda: se dibuja con nuestro diseño desde productos.json ---------- */
   var grid = $("#shopGrid"), cats = $("#shopCats"), empty = $("#shopEmpty");
