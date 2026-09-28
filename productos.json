@@ -1,7 +1,33 @@
 {
-  "actualizado": null,
-  "origen": "https://ec.geeksolutions.com.ve/shop",
-  "nota": "Generado por tools/sync_tienda.py. Al 2026-09-21 la tienda respondia 522 (origen caido), por eso el catalogo esta vacio. Ejecutar 'py tools/sync_tienda.py' cuando vuelva a estar en linea.",
-  "categorias": [],
-  "productos": []
+  "actualizado": "2026-09-28",
+  "origen": "https://ec.geeksolutions.com.ve (18 productos reales; se excluyeron los de ejemplo de nopCommerce)",
+  "categorias": [
+    { "nombre": "Redes", "slug": "redes" },
+    { "nombre": "Energía", "slug": "energia" },
+    { "nombre": "Cómputo", "slug": "computo" },
+    { "nombre": "Punto de venta", "slug": "pos" },
+    { "nombre": "Oficina e impresión", "slug": "oficina" },
+    { "nombre": "Control de acceso", "slug": "acceso" },
+    { "nombre": "Periféricos", "slug": "perifericos" }
+  ],
+  "productos": [
+    { "nombre": "Router MikroTik CCR2004-16G-2S+", "ficha": "16 puertos gigabit y 2 SFP+ · montaje en rack", "categoria": "redes", "imagen": "assets/tienda/router-mikrotik-ccr2004.webp" },
+    { "nombre": "Switch MikroTik CRS317-1G-16S+RM", "ficha": "16 puertos SFP+ de 10 G · para centro de datos", "categoria": "redes", "imagen": "assets/tienda/switch-mikrotik-crs317.webp" },
+    { "nombre": "UPS CDP 3 kVA en línea", "ficha": "Doble conversión · 2.700 W · 8 tomas programables", "categoria": "energia", "imagen": "assets/tienda/ups-cdp-3kva.webp" },
+    { "nombre": "UPS IT en línea 2 kVA", "ficha": "Onda sinusoidal pura · transferencia 0 ms · 1.600 W", "categoria": "energia", "imagen": "assets/tienda/ups-it-salidas-ot2000va.webp" },
+    { "nombre": "UPS interactivo 1000 VA", "ficha": "600 W · 4 tomas · pantalla de estado", "categoria": "energia", "imagen": "assets/tienda/ups-1000-va600w.webp" },
+    { "nombre": "Equipo AMD Ryzen 5 5500GT", "ficha": "32 GB de RAM · SSD 256 GB · garantía de 6 meses", "categoria": "computo", "imagen": "assets/tienda/amd-ryzen-5-5500gt.webp" },
+    { "nombre": "Equipo Intel Core i5 reacondicionado", "ficha": "9.ª generación · 16 GB de RAM · SSD 512 GB · wifi", "categoria": "computo", "imagen": "assets/tienda/cpu-intel-i5-reacondicionado.webp" },
+    { "nombre": "SSD Mushkin Element 512 GB", "ficha": "SATA III de 2,5″ · para PC, laptop o servidor", "categoria": "computo", "imagen": "assets/tienda/ssd-512-gb.webp" },
+    { "nombre": "Monitor táctil AON 15″", "ficha": "TSM-115TS · capacitivo multipunto · USB, VGA y HDMI", "categoria": "pos", "imagen": "assets/tienda/monitor-touch-aon.webp" },
+    { "nombre": "Monitor táctil Advanced 15″", "ficha": "APT-E15B9A · 1280 × 1024 · resistivo", "categoria": "pos", "imagen": "assets/tienda/monitor-touch.webp" },
+    { "nombre": "Impresora térmica de etiquetas Advanced", "ficha": "APT-LP610 · 203 dpi · códigos de barras 1D", "categoria": "pos", "imagen": "assets/tienda/impresora-de-etiquetas.webp" },
+    { "nombre": "Rollo de etiquetas térmicas", "ficha": "57 × 32 mm · 1.500 etiquetas por rollo", "categoria": "pos", "imagen": "assets/tienda/etiquetas.webp" },
+    { "nombre": "Impresora matricial Epson FX-890II", "ficha": "9 agujas · hasta 738 cps · formularios continuos", "categoria": "oficina", "imagen": "assets/tienda/epson-fx890ii.jpeg" },
+    { "nombre": "Escáner portátil Epson WorkForce ES-50", "ficha": "Compacto · para documentos, recibos y fotos", "categoria": "oficina", "imagen": "assets/tienda/escaner-epson-es-50.webp" },
+    { "nombre": "Terminal de reconocimiento facial y QR", "ficha": "Hikvision MinMoe DS-K1T670MWX-QR · wifi", "categoria": "acceso", "imagen": "assets/tienda/terminal-facial-qr.png" },
+    { "nombre": "Teclado Strig K15", "ficha": "USB · distribución en español con Ñ", "categoria": "perifericos", "imagen": "assets/tienda/teclado-usb.webp" },
+    { "nombre": "Teclado USB alámbrico", "ficha": "Negro · conexión USB para PC", "categoria": "perifericos", "imagen": "assets/tienda/teclado.webp" },
+    { "nombre": "Micrófono USB de escritorio", "ficha": "Omnidireccional · cancelación de ruido", "categoria": "perifericos", "imagen": "assets/tienda/microfono-usb.webp" }
+  ]
 }

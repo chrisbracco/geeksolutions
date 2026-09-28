@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://ec.geeksolutions.com.ve; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com">
 
 <title>Geek Solutions — Infraestructura, nube y estructura operativa · Porlamar, Venezuela</title>
 <meta name="description" content="Geek Solutions: 15 años montando y sosteniendo infraestructura tecnológica en Venezuela. Nube AWS y Azure, servidores, redes MikroTik y Cisco, correo corporativo, Microsoft 365, bases de datos, videovigilancia y ciberseguridad. Además, estructura operativa, indicadores de gestión y automatización. Porlamar, Isla de Margarita.">
@@ -18,11 +18,11 @@
 <meta property="og:title" content="Geek Solutions — Infraestructura, nube y estructura operativa">
 <meta property="og:description" content="15 años montando y sosteniendo la tecnología de empresas en Venezuela. Nube, servidores, redes, correo corporativo y videovigilancia.">
 <meta property="og:url" content="https://www.geeksolutions.com.ve/">
-<meta property="og:image" content="https://www.geeksolutions.com.ve/assets/carousel-1.jpg">
+<meta property="og:image" content="https://www.geeksolutions.com.ve/assets/project/project-3.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Geek Solutions — Infraestructura, nube y estructura operativa">
 <meta name="twitter:description" content="15 años montando y sosteniendo la tecnología de empresas en Venezuela.">
-<meta name="twitter:image" content="https://www.geeksolutions.com.ve/assets/carousel-1.jpg">
+<meta name="twitter:image" content="https://www.geeksolutions.com.ve/assets/project/project-3.jpg">
 <meta name="theme-color" content="#0e1113">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e1113'/%3E%3Ctext x='32' y='44' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='700' fill='%2326d48c' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
@@ -184,9 +184,22 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;background:var(--black);color:#fff;overflow:hidden;isolation:isolate}
-.hero-bg{position:absolute;inset:0;z-index:-2}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.3;filter:grayscale(.55) contrast(1.06)}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,rgba(14,17,19,.96) 0%,rgba(14,17,19,.82) 46%,rgba(14,17,19,.55) 100%)}
+/* fondo sin fotografía: retícula técnica + resplandor del acento. Cero imágenes
+   de banco: pesaban, se pixelaban y le quitaban seriedad al sitio. */
+.hero-bg{
+  position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(55% 65% at 82% 28%,rgba(38,212,140,.17),transparent 70%),
+    radial-gradient(40% 50% at 8% 95%,rgba(38,212,140,.07),transparent 70%),
+    var(--black)
+}
+.hero-bg::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 75% 70% at 72% 38%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 72% 38%,#000 20%,transparent 78%)
+}
 .hero-in{max-width:var(--maxw);margin:0 auto;padding:116px var(--pad) 68px;width:100%}
 .hero .label{color:var(--accent-bright);display:flex;align-items:center;gap:12px;margin-bottom:24px}
 .hero .label::before{content:"";width:32px;height:1px;background:var(--accent-bright);flex:none}
@@ -344,11 +357,11 @@ section[id],div[id]{scroll-margin-top:86px}
 
 /* ---------- proyectos ---------- */
 .proj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media (max-width:1100px){.proj-grid{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:800px){.proj-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:460px){.proj-grid{grid-template-columns:1fr}}
+@media (max-width:1100px){.proj-grid{grid-template-columns:repeat(2,1fr)}}
+/* 1 ancha + 6 = 8 celdas: cierra en filas completas a 4 y a 2 columnas */
+.proj.proj--wide{grid-column:span 2;aspect-ratio:3/1}
 .proj{position:relative;border-radius:13px;overflow:hidden;background:var(--ink);aspect-ratio:3/2;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.proj img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:grayscale(.72) brightness(.7);transition:filter .45s var(--ease),transform .55s var(--ease)}
+.proj img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:grayscale(.72) brightness(.7);transition:filter .45s var(--ease),transform .55s var(--ease)}
 .proj-cap{position:absolute;inset:auto 0 0 0;padding:18px 16px 15px;background:linear-gradient(transparent,rgba(14,17,19,.92) 60%);z-index:1}
 .proj-cap h4{font-size:.98rem;color:#fff;margin-bottom:2px;letter-spacing:-.018em}
 .proj-cap span{font-size:.79rem;color:var(--gray-lt)}
@@ -368,15 +381,32 @@ section[id],div[id]{scroll-margin-top:86px}
 @media (max-width:1100px){.shop-grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:800px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:430px){.shop-grid{grid-template-columns:1fr}}
-.prod{background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
-@media (hover:hover) and (pointer:fine){.prod:hover{border-color:var(--gray-xlt);transform:translateY(-4px);box-shadow:0 14px 32px rgba(14,17,19,.09)}}
-.prod-img{aspect-ratio:1/1;background:var(--off-white);display:grid;place-items:center;overflow:hidden}
-.prod-img img{width:100%;height:100%;object-fit:contain;padding:14px}
-.prod-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1;gap:8px}
-.prod-body h4{font-size:.96rem;letter-spacing:-.015em;line-height:1.35}
-.prod-price{font-size:1.05rem;font-weight:600;color:var(--black);margin-top:auto}
-.prod-price small{font-size:.84rem;font-weight:400;color:var(--gray-lt)}
-.prod .btn{margin-top:10px;width:100%}
+/* la ficha entera es el enlace a WhatsApp: en el teléfono se toca en cualquier parte */
+.prod{background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;color:inherit;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
+.prod[hidden]{display:none}
+/* en escritorio se muestran 8 y el resto tras "ver todos"; en móvil el carrusel ya los contiene */
+@media (min-width:761px){.shop-grid.is-short .prod:nth-child(n+9){display:none}}
+.shop-more{display:flex;justify-content:center;margin-top:22px}
+.shop-more[hidden]{display:none}
+@media (max-width:760px){.shop-more{display:none}}
+@media (hover:hover) and (pointer:fine){
+  .prod:hover{border-color:var(--gray-xlt);transform:translateY(-4px);box-shadow:0 14px 32px rgba(14,17,19,.09)}
+  .prod:hover .prod-img img{transform:scale(1.05)}
+  .prod:hover .prod-cta{color:var(--accent-dk)}
+  .prod:hover .prod-cta>svg{transform:translateX(3px)}
+}
+/* las fotos de la tienda vienen sobre blanco: el fondo blanco las funde sin recuadro */
+.prod-img{aspect-ratio:1/1;background:var(--white);display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--rule)}
+.prod-img img{width:100%;height:100%;object-fit:contain;padding:18px;transition:transform .45s var(--ease)}
+.prod-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;gap:5px}
+.prod-cat{font-size:.74rem;font-weight:600;color:var(--accent)}
+.prod-body h4{font-size:.95rem;letter-spacing:-.015em;line-height:1.32}
+.prod-spec{font-size:.82rem;color:var(--gray);line-height:1.45}
+.prod-cta{display:flex;align-items:center;gap:7px;margin-top:auto;padding-top:12px;font-size:.84rem;font-weight:600;color:var(--ink);transition:color .2s var(--ease)}
+.prod-cta svg{width:15px;height:15px;flex:none;transition:transform .2s var(--ease)}
+.prod-cta .wa-dot{width:18px;height:18px;border-radius:50%;background:var(--wa);display:grid;place-items:center}
+.prod-cta .wa-dot svg{width:11px;height:11px;fill:#fff}
+
 .shop-empty{border:1px dashed var(--gray-xlt);border-radius:16px;padding:clamp(28px,4vw,48px);text-align:center;background:var(--white)}
 .shop-empty h3{font-size:1.24rem;margin-bottom:10px;letter-spacing:-.022em}
 .shop-empty p{font-size:.98rem;color:var(--gray);line-height:1.66;max-width:56ch;margin:0 auto 22px}
@@ -494,6 +524,48 @@ section[id],div[id]{scroll-margin-top:86px}
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}
 }
 
+/* ---------- carruseles en móvil ----------
+   En escritorio cada bloque sigue siendo su grilla. Bajo 760 px las grillas largas
+   se vuelven una fila que se desliza con el dedo, como las fichas de precios:
+   se ve la siguiente asomando por la derecha y la página deja de ser un pasillo. */
+.rail-meter{display:none}
+@media (max-width:760px){
+  .rail{
+    display:flex !important;gap:12px;
+    overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+    scroll-padding-left:var(--pad);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+    margin-left:calc(var(--pad) * -1);margin-right:calc(var(--pad) * -1);
+    padding:4px var(--pad) 8px;
+    background:none;border:0;border-radius:0;
+    scrollbar-width:none
+  }
+  .rail[hidden]{display:none !important}
+  .rail::-webkit-scrollbar{display:none}
+  .rail>*,.rail>.grid>.card{flex:0 0 84%;scroll-snap-align:start;min-width:0}
+  /* servicios: las dos grillas se funden en una sola fila */
+  .rail>.grid{display:contents}
+  .rail .card{border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+  .rail .proj{flex-basis:80%;aspect-ratio:4/3}
+  .rail .prod{flex-basis:62%}
+  /* testimonios y equipo: cada ficha a su altura, sin estirarse a la más larga */
+  .tst-grid.rail,.team.rail{align-items:flex-start}
+  .rail .tst-q{flex:none}
+  .rail .person{flex-basis:80%;flex-direction:row;align-items:center}
+  .rail .val{flex-basis:80%;border:1px solid var(--rule);border-radius:16px}
+  .vals.rail{margin-top:36px}
+
+  .rail-meter{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .rail-meter i{flex:1;height:2px;border-radius:2px;background:var(--gray-xlt);position:relative;overflow:hidden}
+  .rail-meter b{position:absolute;top:0;bottom:0;left:0;border-radius:2px;background:var(--accent);transition:left .12s linear}
+  .rail-meter span{font-size:.8rem;font-weight:500;color:var(--gray-lt);font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+  .sec-dark .rail-meter i{background:var(--rule-dk)}
+  .sec-dark .rail-meter b{background:var(--accent-bright)}
+
+  /* las categorías de la tienda también se deslizan, en una sola línea */
+  .shop-cats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:calc(var(--pad) * -1);margin-right:calc(var(--pad) * -1);padding:0 var(--pad) 2px}
+  .shop-cats::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+}
 /* ---------- ajustes móviles ---------- */
 @media (max-width:900px){
   .nav.is-stuck{backdrop-filter:none;background:rgba(255,255,255,.98)}
@@ -537,7 +609,7 @@ section[id],div[id]{scroll-margin-top:86px}
 
 <!-- ================= hero ================= -->
 <section class="hero" id="top">
-  <div class="hero-bg"><img src="assets/carousel-1.jpg" alt="" width="1376" height="768" fetchpriority="high"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-in">
     <span class="label">Porlamar · Nueva Esparta · Venezuela</span>
     <h1>Su operación creció más rápido que su <em>infraestructura</em>.</h1>
@@ -581,6 +653,7 @@ section[id],div[id]{scroll-margin-top:86px}
       <p>Seis frentes técnicos que sostienen la operación diaria de una empresa. No vendemos herramientas: nos hacemos cargo de que estén bien montadas y sigan en pie.</p>
     </div>
 
+    <div class="svc rail" data-rail-items=".card">
     <div class="grid grid-3 rv">
       <article class="card">
         <span class="card-num">01</span>
@@ -646,6 +719,7 @@ section[id],div[id]{scroll-margin-top:86px}
         <div class="card-tags"><span class="tag">Odoo</span><span class="tag">Desarrollo web</span></div>
       </article>
     </div>
+    </div>
   </div>
 </section>
 
@@ -658,7 +732,7 @@ section[id],div[id]{scroll-margin-top:86px}
       <p>Hay empresas cuya infraestructura está sana y aun así el gerente pasa el día persiguiendo datos entre planillas. Eso no se arregla comprando servidores: se arregla ordenando el flujo. Cuatro puntos de entrada, según dónde esté hoy.</p>
     </div>
 
-    <div class="lvl-grid rv">
+    <div class="lvl-grid rail rv">
       <article class="lvl">
         <span class="lvl-tag">Punto de entrada</span>
         <h3>Diagnóstico profundo</h3>
@@ -770,23 +844,16 @@ section[id],div[id]{scroll-margin-top:86px}
     <div class="sec-head rv">
       <span class="label">Proyectos</span>
       <h2>Trabajo entregado</h2>
-      <p>Implementaciones ejecutadas para clientes en Venezuela, desde cableado y racks hasta arquitectura en nube y tableros de indicadores.</p>
+      <p>Fotos de obra, sin retoque ni banco de imágenes: centros de datos, cableado, racks y videovigilancia instalados por nuestro equipo.</p>
     </div>
-    <div class="proj-grid rv">
-      <article class="proj"><img src="assets/project/project-6.jpg" alt="Tablero de indicadores en Power BI" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Power BI</h4><span>Análisis de datos</span></div></article>
+    <div class="proj-grid rail rv">
+      <article class="proj proj--wide"><img src="assets/project/cctv1.jpg" alt="Monitor con las cámaras de videovigilancia de un ferry" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Videovigilancia a bordo</h4><span>Diseño, instalación y centro de monitoreo</span></div></article>
       <article class="proj"><img src="assets/project/project-2.jpg" alt="Centro de datos" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Centro de datos</h4><span>Diseño y arquitectura</span></div></article>
-      <article class="proj"><img src="assets/project/cctv1.jpg" alt="Sistema de videovigilancia" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Videovigilancia</h4><span>Diseño e implementación</span></div></article>
-      <article class="proj"><img src="assets/project/project-3.jpg" alt="Cableado estructurado" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cableado estructurado</h4><span>Optimización e instalación</span></div></article>
-      <article class="proj"><img src="assets/project/red.jpg" alt="Equipos de red y comunicaciones" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Comunicaciones</h4><span>Instalación y administración</span></div></article>
-      <article class="proj"><img src="assets/project/project-4.jpg" alt="Servidores en rack" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Servidores</h4><span>Instalación y soporte</span></div></article>
-      <article class="proj"><img src="assets/project/project-5.jpg" alt="Arquitectura en AWS" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Arquitectura AWS</h4><span>Diseño e implementación</span></div></article>
-      <article class="proj"><img src="assets/project/tel1.jpg" alt="Telefonía IP" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Telefonía IP</h4><span>Implementación y gestión</span></div></article>
-      <article class="proj"><img src="assets/project/cab1.jpg" alt="Cableado estructurado" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cableado estructurado</h4><span>Diseño e implementación</span></div></article>
-      <article class="proj"><img src="assets/project/bak1.jpg" alt="Sistema de respaldo" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Respaldos</h4><span>Continuidad del negocio</span></div></article>
-      <article class="proj"><img src="assets/project/azu2.jpg" alt="Arquitectura en Azure" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Arquitectura Azure</h4><span>Diseño e implementación</span></div></article>
-      <article class="proj"><img src="assets/project/sbl1.jpg" alt="Instalación de racks" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Racks</h4><span>Instalación y cableado</span></div></article>
-      <article class="proj"><img src="assets/project/odoo.jpg" alt="Implementación de Odoo" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Implementación de Odoo</h4><span>Módulos web y calendarios</span></div></article>
-      <article class="proj"><img src="assets/project/nav2.jpg" alt="Videovigilancia" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Videovigilancia</h4><span>Diseño e implementación</span></div></article>
+      <article class="proj"><img src="assets/project/project-3.jpg" alt="Cableado estructurado en racks" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cableado estructurado</h4><span>Ordenamiento e instalación</span></div></article>
+      <article class="proj"><img src="assets/project/project-4.jpg" alt="Gabinetes de servidores" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Servidores</h4><span>Instalación y soporte</span></div></article>
+      <article class="proj"><img src="assets/project/red.jpg" alt="Técnico revisando un rack de comunicaciones" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Comunicaciones</h4><span>Instalación en sitio</span></div></article>
+      <article class="proj"><img src="assets/project/sbl1.jpg" alt="Rack de distribución con UPS" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Racks</h4><span>Instalación y cableado</span></div></article>
+      <article class="proj"><img src="assets/project/nav2.jpg" alt="Cámara exterior instalada en un barco" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cámaras exteriores</h4><span>Instalación marina</span></div></article>
     </div>
   </div>
 </section>
@@ -797,14 +864,15 @@ section[id],div[id]{scroll-margin-top:86px}
     <div class="shop-head rv">
       <div class="sec-head" style="margin-bottom:0">
         <span class="label">Tienda</span>
-        <h2>Equipos y licencias</h2>
-        <p>Nuestro catálogo, aquí mismo. Al elegir un producto pasará a su ficha en la tienda, que es donde se completa la compra.</p>
+        <h2>Equipos que instalamos y respaldamos</h2>
+        <p>Redes, energía, cómputo y punto de venta. Toque un equipo y le confirmamos disponibilidad y precio por WhatsApp, con la instalación si la necesita.</p>
       </div>
-      <a class="btn btn-line btn-sm" href="https://ec.geeksolutions.com.ve/shop" target="_blank" rel="noopener">Abrir catálogo completo</a>
+      <a class="btn btn-line btn-sm" href="https://wa.me/584122721953?text=Hola%20Geek%20Solutions%2C%20busco%20un%20equipo%20que%20no%20veo%20en%20la%20tienda" target="_blank" rel="noopener">¿No lo ve? Pídalo aquí</a>
     </div>
 
     <div class="shop-cats rv" id="shopCats" hidden></div>
-    <div class="shop-grid rv" id="shopGrid" hidden></div>
+    <div class="shop-grid rail rv is-short" id="shopGrid" hidden></div>
+    <div class="shop-more" id="shopMore" hidden><button type="button" class="btn btn-line">Ver los 18 equipos</button></div>
 
     <div class="shop-empty rv" id="shopEmpty">
       <h3>Catálogo sincronizándose</h3>
@@ -822,7 +890,7 @@ section[id],div[id]{scroll-margin-top:86px}
       <h2>Lo que dicen de nosotros</h2>
       <p>Empresas e instituciones que nos confiaron su infraestructura, en sus palabras.</p>
     </div>
-    <div class="tst-grid rv">
+    <div class="tst-grid rail rv">
       <article class="tst">
         <p class="tst-q">“Soporte técnico excepcional. Soluciones rápidas y efectivas para nuestras necesidades tecnológicas.”</p>
         <div class="tst-by"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><div><b>Navibus</b><span>Transporte</span></div></div>
@@ -870,7 +938,7 @@ section[id],div[id]{scroll-margin-top:86px}
       <p>No preguntamos primero qué software usa. Preguntamos dónde se le está cayendo la operación.</p>
     </div>
 
-    <div class="team rv">
+    <div class="team rail rv">
       <div class="person">
         <img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="62" height="62">
         <div><b>Amilcar Roa</b><span>Infraestructura, nube y redes</span></div>
@@ -889,7 +957,7 @@ section[id],div[id]{scroll-margin-top:86px}
       </div>
     </div>
 
-    <div class="vals rv">
+    <div class="vals rail rv">
       <div class="val"><span class="label">Misión</span><p>Proveer soluciones tecnológicas que impulsen la transformación digital de nuestros clientes, optimizando sus procesos y maximizando su productividad.</p></div>
       <div class="val"><span class="label">Visión</span><p>Ser referencia en el mercado latinoamericano de servicios tecnológicos, reconocidos por excelencia técnica, innovación y compromiso con el resultado del cliente.</p></div>
       <div class="val"><span class="label">Valores</span><p>Innovación, integridad, compromiso, trabajo en equipo y orientación al cliente guían cada proyecto que emprendemos.</p></div>
@@ -1093,7 +1161,6 @@ section[id],div[id]{scroll-margin-top:86px}
      ya redactado, así que nunca se pierde un contacto. */
   var WEB3FORMS_KEY = "";
   var WA = "584122721953";
-  var TIENDA = "https://ec.geeksolutions.com.ve";
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine   = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -1273,10 +1340,6 @@ section[id],div[id]{scroll-margin-top:86px}
       }
 
       if (window.innerWidth >= 900){
-        gsap.to(".hero-bg img", {
-          yPercent: 14, scale: 1.06, ease: "none",
-          scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: .6 }
-        });
         gsap.from(".hero-meta div", {
           opacity: 0, y: 16, duration: .7, stagger: .09, ease: "power2.out", delay: .25
         });
@@ -1289,41 +1352,62 @@ section[id],div[id]{scroll-margin-top:86px}
   /* ---------- tienda: se dibuja con nuestro diseño desde productos.json ---------- */
   var grid = $("#shopGrid"), cats = $("#shopCats"), empty = $("#shopEmpty");
 
-  function money(p, m){
-    if (!p) return '<small>Consultar precio</small>';
-    return (m === "USD" ? "$ " : "") + p;
-  }
   function esc(s){
     return String(s == null ? "" : s)
       .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
 
-  function cardFor(pr){
-    var art = document.createElement("article");
-    art.className = "prod";
-    art.setAttribute("data-cat", pr.categoria || "");
-    var img = pr.imagen
-      ? '<img src="' + esc(pr.imagen) + '" alt="' + esc(pr.nombre) + '" loading="lazy">'
-      : '<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#93a0a7" stroke-width="1.4"><path d="M3 9h18M5 9V6.5A1.5 1.5 0 0 1 6.5 5h11A1.5 1.5 0 0 1 19 6.5V9M4 9v9.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9"/></svg>';
-    art.innerHTML =
-      '<div class="prod-img">' + img + '</div>' +
+  /* Cada ficha abre WhatsApp con el equipo ya nombrado. No se enlaza a la tienda
+     vieja: el cliente se queda en esta página hasta que decide escribir. */
+  var WA_ICO = '<span class="wa-dot"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2c-.2.2-.3.2-.6.1s-1.3-.5-2.4-1.5c-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5s0-.4 0-.5-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.5.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4s.2-1.2.2-1.4c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></span>';
+  var ARROW  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  function cardFor(pr, catName){
+    var a = document.createElement("a");
+    a.className = "prod";
+    a.href = waLink("Hola Geek Solutions, me interesa este equipo de la tienda: " + pr.nombre +
+                    ". ¿Me confirman disponibilidad y precio?");
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.setAttribute("data-cat", pr.categoria || "");
+    a.setAttribute("aria-label", pr.nombre + " — consultar por WhatsApp");
+    a.innerHTML =
+      '<div class="prod-img"><img src="' + esc(pr.imagen) + '" alt="" loading="lazy" width="550" height="550"></div>' +
       '<div class="prod-body">' +
+        (catName ? '<span class="prod-cat">' + esc(catName) + '</span>' : '') +
         '<h4>' + esc(pr.nombre) + '</h4>' +
-        '<p class="prod-price">' + money(esc(pr.precio), pr.moneda) + '</p>' +
-        '<a class="btn btn-line btn-sm" href="' + esc(pr.url || TIENDA) + '" target="_blank" rel="noopener">Ver producto</a>' +
+        (pr.ficha ? '<p class="prod-spec">' + esc(pr.ficha) + '</p>' : '') +
+        '<span class="prod-cta">' + WA_ICO + 'Consultar precio ' + ARROW + '</span>' +
       '</div>';
-    return art;
+    return a;
   }
 
   function renderShop(data){
     var prods = (data && data.productos) || [];
     if (!prods.length) return;              // se queda el estado vacío
 
+    var list = (data.categorias || []).filter(function(c){ return c && c.nombre; });
+    var names = {};
+    list.forEach(function(c){ names[c.slug] = c.nombre; });
+
     empty.hidden = true;
     grid.hidden = false;
-    prods.forEach(function(pr){ grid.appendChild(cardFor(pr)); });
+    prods.forEach(function(pr){ grid.appendChild(cardFor(pr, names[pr.categoria])); });
 
-    var list = (data.categorias || []).filter(function(c){ return c && c.nombre; });
+    var expanded = false, more = $("#shopMore");
+    if (more && prods.length > 8){
+      var mb = more.querySelector("button");
+      mb.textContent = "Ver los " + prods.length + " equipos";
+      more.hidden = false;
+      mb.addEventListener("click", function(){
+        expanded = true;
+        grid.classList.remove("is-short");
+        more.hidden = true;
+      });
+    } else {
+      grid.classList.remove("is-short");
+    }
+
     if (list.length){
       cats.hidden = false;
       var mk = function(nombre, slug, on){
@@ -1337,12 +1421,17 @@ section[id],div[id]{scroll-margin-top:86px}
           $$(".prod", grid).forEach(function(p){
             p.hidden = slug !== "" && p.getAttribute("data-cat") !== slug;
           });
+          grid.classList.toggle("is-short", slug === "" && !expanded);
+          if (more) more.hidden = !grid.classList.contains("is-short");
+          grid.scrollLeft = 0;
+          grid.dispatchEvent(new Event("scroll"));
         });
         return b;
       };
       cats.appendChild(mk("Todo", "", true));
       list.forEach(function(c){ cats.appendChild(mk(c.nombre, c.slug, false)); });
     }
+    grid.dispatchEvent(new Event("scroll"));
   }
 
   if (grid){
@@ -1351,6 +1440,40 @@ section[id],div[id]{scroll-margin-top:86px}
       .then(function(d){ if (d) renderShop(d); })
       .catch(function(){ /* se queda el estado vacío con el botón de cotización */ });
   }
+
+  /* ---------- carruseles móviles: barra de avance y contador ---------- */
+  $$(".rail").forEach(function(r){
+    var meter = document.createElement("div");
+    meter.className = "rail-meter";
+    meter.setAttribute("aria-hidden", "true");
+    meter.innerHTML = "<i><b></b></i><span></span>";
+    r.parentNode.insertBefore(meter, r.nextSibling);
+    var bar = meter.querySelector("b"), lbl = meter.querySelector("span");
+    var sel = r.getAttribute("data-rail-items");
+    var pending = false;
+
+    function items(){
+      var all = sel ? $$(sel, r) : Array.prototype.slice.call(r.children);
+      return all.filter(function(el){ return !el.hidden; });
+    }
+    function update(){
+      pending = false;
+      var list = items(), max = r.scrollWidth - r.clientWidth;
+      if (r.hidden || !list.length || max <= 2){ meter.style.visibility = "hidden"; return; }
+      meter.style.visibility = "";
+      var frac = r.clientWidth / r.scrollWidth;
+      bar.style.width = (frac * 100) + "%";
+      bar.style.left  = ((r.scrollLeft / max) * (1 - frac) * 100) + "%";
+      var step = list.length > 1 ? list[1].offsetLeft - list[0].offsetLeft : 1;
+      var i = r.scrollLeft >= max - 2 ? list.length : Math.round(r.scrollLeft / (step || 1)) + 1;
+      lbl.textContent = Math.min(i, list.length) + " / " + list.length;
+    }
+    function schedule(){ if (!pending){ pending = true; requestAnimationFrame(update); } }
+    r.addEventListener("scroll", schedule, {passive:true});
+    window.addEventListener("resize", schedule, {passive:true});
+    window.addEventListener("load", schedule);
+    update();
+  });
 
   /* ---------- preselección de servicio ---------- */
   $$("[data-svc]").forEach(function(a){

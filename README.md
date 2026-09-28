@@ -56,11 +56,12 @@ formulario, listeners de scroll con rAF throttle y `passive:true`.
 
 ```
 index.html              todo el sitio
-productos.json          catálogo de la tienda (lo genera tools/sync_tienda.py)
-tools/sync_tienda.py    lee ec.geeksolutions.com.ve y regenera productos.json
+productos.json          catálogo de la tienda (18 equipos, redactado a mano)
+tools/sync_tienda.py    detecta productos nuevos en la tienda vieja y baja sus fotos
 assets/                 imágenes (recomprimidas, -85% vs. el original)
   logos/                5 logos de cliente
-  project/              14 proyectos, todos 660x440 (3:2)
+  project/              7 fotos de obra reales, 660x440 (3:2) — cero banco de imágenes
+  tienda/               fotos de los 18 equipos, bajadas de la tienda vieja
 docs/mapeo-auditoria.md el mapeo completo de las 3 fuentes + los 18 defectos detectados
 .github/workflows/      deploy automático a GitHub Pages al hacer push a main
 ```
@@ -69,19 +70,26 @@ Secciones: `#top` · `#servicios` · `#arquitectura` · `#metodo` · `#proyectos
 
 ### La tienda vive dentro de la página
 
-El botón «Tienda» no expulsa al visitante. La sección `#tienda` dibuja el catálogo con
-el diseño de este sitio a partir de `productos.json`, y sólo al pulsar «ver producto» se
-pasa a la ficha en `ec.geeksolutions.com.ve`, que es donde se cobra.
+El botón «Tienda» no expulsa al visitante y la tienda vieja ya no se enlaza. La sección
+`#tienda` dibuja el catálogo desde `productos.json` con imágenes locales; **cada ficha abre
+WhatsApp con el nombre del equipo ya escrito** («me interesa: …, ¿disponibilidad y precio?»).
+En escritorio se ven 8 y el resto tras «Ver los 18 equipos»; en móvil es un carrusel.
 
-Para refrescar el catálogo:
+`ec.geeksolutions.com.ve` es nopCommerce (no Odoo). De sus 26 productos, 7 son los de ejemplo
+que trae nopCommerce de fábrica (laptops Asus/HP/Lenovo, Photoshop, Windows 8, Sound Forge,
+Digital Storm) y 1 es un switch duplicado: se excluyeron. Para traer productos nuevos:
 
 ```
-py tools/sync_tienda.py          # sincroniza
-py tools/sync_tienda.py --dry    # sólo muestra lo que encontró
+py tools/sync_tienda.py     # baja fotos nuevas y deja los datos en tools/tienda_nuevos.json
 ```
 
-Si la tienda no responde el script no toca `productos.json` y sale con código 1.
-Con el catálogo vacío la sección muestra un estado de cortesía con botón de cotización.
+El script no reescribe `productos.json`: los nombres y fichas se redactan a mano ahí.
+
+### Carruseles en móvil
+
+Bajo 760 px, servicios, puntos de entrada, proyectos, tienda, clientes, equipo y valores
+pasan de grilla apilada a una fila deslizable (clase `.rail`), con barra de avance y
+contador «3 / 10» que crea el JS. En escritorio siguen siendo grillas.
 
 ---
 
@@ -115,8 +123,8 @@ El detalle completo está en `docs/mapeo-auditoria.md`. Los de mayor impacto:
 | 3 | **Escribir el checklist de 7 días.** La sección lo promete y hoy no existe el PDF. | Contenido |
 | 4 | **GA4 `G-8Z63VGX2M4`** existe pero faltaba en el home del sitio viejo. No se incluyó aquí todavía: decidir si entra y con qué aviso de cookies. | Amílcar |
 | 5 | Confirmar con Amílcar que los 5 clientes nombrados (Navibus, LD Palm Beach, BT Travel, Sambil Margarita, Grupo Leiros) autorizan seguir apareciendo. | Amílcar |
-| 6 | Foto propia para el hero. La actual es la `carousel-1.jpg` del sitio original. | Amílcar |
-| 7 | **La tienda `ec.geeksolutions.com.ve` devuelve 522** (Cloudflare no alcanza el origen). Estuvo en línea a las 21:15 del 21-sep y cayó poco después. Mientras siga así el catálogo va vacío. Cuando vuelva: `py tools/sync_tienda.py`. | Amílcar |
+| 6 | ~~Foto del hero~~ **Resuelto 28-sep:** el hero es una retícula en CSS. La `carousel-1.jpg` era una gráfica generada por IA (con marca de agua) y se borró junto con 7 capturas de demos y fotos de banco. | — |
+| 7 | ~~Tienda caída~~ **Resuelto 28-sep:** volvió; 18 productos reales importados con sus fotos. Faltan precios: hoy todo va a «Consultar precio». | — |
 | 8 | Retratos de Christian Bracconi y Juan Matute. Ahora salen con iniciales. | — |
 | 9 | Confirmar los nombres de dos clientes: el logo que el sitio viejo llamaba «LD Hoteles» dice **LD Palm Beach**, y el de Sambil es **Sambil Margarita**. Se usó lo que dice el logo. | Amílcar |
 
