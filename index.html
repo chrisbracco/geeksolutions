@@ -456,22 +456,6 @@ section[id],div[id]{scroll-margin-top:86px}
 .val{background:var(--white);padding:clamp(24px,3vw,36px)}
 .val p{font-size:.96rem;color:var(--gray);line-height:1.68}
 
-/* ---------- checklist ---------- */
-.ckl{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,78px);align-items:center}
-@media (max-width:920px){.ckl{grid-template-columns:1fr}}
-.ckl-head h2{font-size:clamp(1.9rem,4.3vw,3.1rem);letter-spacing:-.034em;margin-bottom:18px;max-width:15ch}
-.ckl-head h2 em{font-style:normal;color:var(--accent-bright)}
-.ckl-head>p{font-size:clamp(1rem,1.7vw,1.13rem);color:rgba(255,255,255,.68);line-height:1.68;margin-bottom:32px;max-width:50ch}
-.ckl-pts{display:flex;flex-direction:column;gap:22px;counter-reset:c}
-.ckl-pt{padding-left:28px;position:relative}
-.ckl-pt::before{content:counter(c);counter-increment:c;position:absolute;left:0;top:0;font-size:.86rem;font-weight:600;color:var(--accent-bright)}
-.ckl-pt h4{font-size:1.04rem;margin-bottom:6px;letter-spacing:-.018em}
-.ckl-pt p{font-size:.94rem;color:rgba(255,255,255,.64);line-height:1.64}
-.ckl-form{background:rgba(255,255,255,.05);border:1px solid var(--rule-dk);border-radius:18px;padding:clamp(26px,3.4vw,40px)}
-.ckl-form h3{font-size:1.26rem;margin-bottom:10px;letter-spacing:-.024em}
-.ckl-form>p{font-size:.94rem;color:rgba(255,255,255,.64);line-height:1.62;margin-bottom:22px}
-.ckl-form .btn{width:100%;margin-top:4px}
-.ckl-fine{font-size:.82rem;color:var(--gray-lt);margin-top:13px;text-align:center}
 
 /* ---------- formularios ---------- */
 .field{margin-bottom:14px}
@@ -1003,6 +987,14 @@ html.fx .sec{content-visibility:visible}
           <div class="tst-team" title="Christian Bracconi"><i>CB</i></div>
         </div>
       </article>
+      <article class="tst">
+        <p class="tst-q">Análisis de datos y tableros en Power BI para operaciones comerciales: bases depuradas, reportes para dirección y un equipo de ventas guiado por indicadores.</p>
+        <div class="tst-by">
+          <img src="assets/logos/lbs.png" alt="Latam Business School" loading="lazy" width="44" height="44">
+          <div><b>Latam Business School</b><span>Escuela de negocios · desde 2024</span></div>
+          <div class="tst-team" title="Juan Matute"><img src="assets/team-4.jpg" alt="Juan Matute" loading="lazy" width="30" height="30"></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1034,7 +1026,7 @@ html.fx .sec{content-visibility:visible}
         <div><b>Christian Bracconi</b><span>Estructura operativa, indicadores de gestión, automatización y arquitectura de datos</span></div>
       </div>
       <div class="person">
-        <span class="avatar" aria-hidden="true">JM</span>
+        <img src="assets/team-4.jpg" alt="Juan Matute" loading="lazy" width="62" height="62">
         <div><b>Juan Matute</b><span>Análisis de datos en Power BI, tableros de gestión y estrategia de datos para operaciones comerciales</span></div>
       </div>
     </div>
@@ -1043,53 +1035,6 @@ html.fx .sec{content-visibility:visible}
       <div class="val"><span class="label">Misión</span><p>Tecnología que ordena los procesos del cliente y le devuelve productividad.</p></div>
       <div class="val"><span class="label">Visión</span><p>Ser referencia latinoamericana en servicios tecnológicos por excelencia técnica.</p></div>
       <div class="val"><span class="label">Valores</span><p>Integridad, compromiso, trabajo en equipo y foco en el cliente.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= checklist ================= -->
-<section class="sec sec-dark" id="checklist">
-  <div class="wrap">
-    <div class="ckl">
-      <div class="ckl-head rv">
-        <span class="label">Guía gratuita</span>
-        <h2>Ponga su operación en orden en <em>7 días</em></h2>
-        <p>Siete acciones concretas, una por día, para pasar de apagar incendios a una operación que usted controla. Sin comprar nada. Sin jerga técnica.</p>
-        <div class="ckl-pts">
-          <div class="ckl-pt">
-            <h4>Inventario real de lo que sostiene su empresa</h4>
-            <p>En una hora, todo lo que mantiene viva su operación en un solo lugar.</p>
-          </div>
-          <div class="ckl-pt">
-            <h4>Los tres riesgos que sí importan</h4>
-            <p>Respaldo, accesos y continuidad: cuál tiene descubierto hoy.</p>
-          </div>
-          <div class="ckl-pt">
-            <h4>Una rutina que sostiene el orden</h4>
-            <p>Quince minutos cada viernes para detectar el problema antes de que pare todo.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="ckl-form rv">
-        <span class="label">Descarga inmediata</span>
-        <h3>Checklist de 7 días</h3>
-        <p>Déjenos su correo y se lo enviamos. Nada más: ni llamadas de venta, ni correos diarios.</p>
-        <form id="form-ckl" novalidate>
-          <input type="text" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="field">
-            <label for="ckl-nombre">Nombre</label>
-            <input id="ckl-nombre" name="nombre" type="text" placeholder="Su nombre" required autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="ckl-email">Correo electrónico</label>
-            <input id="ckl-email" name="email" type="email" placeholder="nombre@empresa.com" required autocomplete="email">
-          </div>
-          <button type="submit" class="btn btn-solid">Quiero el checklist</button>
-          <p class="ckl-fine">Respetamos su privacidad. Se da de baja cuando quiera.</p>
-          <p class="form-note" id="note-ckl" role="status" aria-live="polite"></p>
-        </form>
-      </div>
     </div>
   </div>
 </section>
@@ -1215,7 +1160,6 @@ html.fx .sec{content-visibility:visible}
           <li><a href="https://wa.me/584122721953" target="_blank" rel="noopener">+58 412-2721953</a></li>
           <li><a href="mailto:info@geeksolutions.com.ve">info@geeksolutions.com.ve</a></li>
           <li><a href="https://goo.gl/maps/Zd4BCynmTb98ivUJ6" target="_blank" rel="noopener">Porlamar, Nueva Esparta</a></li>
-          <li><a href="#checklist">Checklist de 7 días</a></li>
         </ul>
       </div>
     </div>
@@ -1481,7 +1425,7 @@ html.fx .sec{content-visibility:visible}
       gsap.from(h1.words, {opacity:0, y:34, rotationX:-35, transformOrigin:"50% 100%", duration:1.1, stagger:.06, ease:"power4.out", delay:.1});
 
       /* resto de titulares: por palabras al entrar en pantalla */
-      $$(".sec-head h2, .ckl-head h2").forEach(function(h){
+      $$(".sec-head h2").forEach(function(h){
         var s = new SplitText(h, {type:"words", wordsClass:"split-w"});
         gsap.from(s.words, {
           opacity:0, x:-18, y:22, duration:1.2, stagger:.045, ease:"power4.out",
@@ -1762,15 +1706,6 @@ html.fx .sec{content-visibility:visible}
       .catch(fallback);
     });
   }
-
-  var fCkl = $("#form-ckl");
-  if (fCkl) send(fCkl, $("#note-ckl"),
-    function(d){
-      return "Hola Geek Solutions, quiero el checklist de 7 días.\n\nNombre: " + (d.nombre||"") +
-             "\nCorreo: " + (d.email||"");
-    },
-    "Listo. Le abrimos WhatsApp con el mensaje redactado para confirmar el envío."
-  );
 
   var fCt = $("#form-ct");
   if (fCt) send(fCt, $("#note-ct"),
