@@ -278,6 +278,13 @@ section[id],div[id]{scroll-margin-top:86px}
 .grid-2{grid-template-columns:repeat(2,1fr)}
 @media (max-width:900px){.grid-3{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:620px){.grid-3,.grid-2{grid-template-columns:1fr}}
+.grid-5{grid-template-columns:repeat(5,1fr)}
+@media (max-width:1100px){.grid-5{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.grid-5{grid-template-columns:repeat(2,1fr)}}
+#servicios .card{padding:clamp(20px,2.2vw,28px)}
+#servicios .card-num{margin-bottom:10px}
+#servicios .card h3{font-size:1.02rem;margin-bottom:6px}
+#servicios .card p{font-size:.88rem;line-height:1.55}
 .card{background:var(--white);padding:clamp(24px,3.2vw,40px);position:relative;transition:background .3s var(--ease)}
 .sec-alt .card{background:var(--paper)}
 .card-num{font-size:.8rem;font-weight:500;color:var(--gray-lt);display:block;margin-bottom:16px}
@@ -423,6 +430,11 @@ section[id],div[id]{scroll-margin-top:86px}
 .tst-by b{font-size:.94rem;font-weight:600;display:block;letter-spacing:-.012em}
 .tst-by span{font-size:.82rem;color:var(--gray-lt)}
 .tst-by img[src*="viceconsulado"]{background:none;padding:0;border-radius:50%}
+.tst-by>div:not(.tst-team){flex:1;min-width:0}
+.tst-team{display:flex;flex:none;margin-left:auto}
+.tst-team img,.tst-team i{width:30px;height:30px;border-radius:50%;border:2px solid var(--white);object-fit:cover;background:var(--accent-soft);padding:0;flex:none}
+.tst-team>*+*{margin-left:-9px}
+.tst-team i{display:grid;place-items:center;font-style:normal;font-size:.68rem;font-weight:600;color:var(--accent-dk)}
 .tst-link{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:600;color:var(--accent);margin-bottom:22px}
 @media (hover:hover){.tst-link:hover{text-decoration:underline}}
 
@@ -732,73 +744,60 @@ html.fx .sec{content-visibility:visible}
     <div class="sec-head rv">
       <span class="label">Servicios</span>
       <h2>Lo que mantenemos funcionando</h2>
-      <p>Seis frentes técnicos que sostienen la operación diaria de una empresa. No vendemos herramientas: nos hacemos cargo de que estén bien montadas y sigan en pie.</p>
+      <p>Diez frentes técnicos que sostienen la operación diaria. Nos hacemos cargo de que estén bien montados y sigan en pie.</p>
     </div>
 
     <div class="svc rail" data-rail-items=".card">
-    <div class="grid grid-3 rv">
+    <div class="grid grid-5 rv">
       <article class="card">
         <span class="card-num">01</span>
-        <h3>Cloud computing</h3>
-        <p>Arquitectura en AWS y Azure: diseño, implementación y monitoreo. Configuración de SES, WAF y gestión de secretos. Revisión de facturación para dejar de pagar por lo que no se usa.</p>
-        <div class="card-tags"><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">WAF</span><span class="tag">SES</span></div>
+        <h3>Nube</h3>
+        <p>AWS y Azure: diseño, monitoreo y facturación bajo control.</p>
       </article>
       <article class="card">
         <span class="card-num">02</span>
-        <h3>Administración de servidores</h3>
-        <p>Windows Server y Linux (Ubuntu / CentOS). Optimización de Active Directory y Exchange, gestión y monitoreo de centros de datos.</p>
-        <div class="card-tags"><span class="tag">Windows Server</span><span class="tag">Linux</span><span class="tag">Active Directory</span></div>
+        <h3>Servidores</h3>
+        <p>Windows Server, Linux, Active Directory y centros de datos.</p>
       </article>
       <article class="card">
         <span class="card-num">03</span>
-        <h3>Infraestructura de correo</h3>
-        <p>Configuración y soporte de Zimbra Collaboration y Postfix. Diagnóstico de fallas críticas de correo y de las bases de datos que lo sostienen.</p>
-        <div class="card-tags"><span class="tag">Zimbra</span><span class="tag">Postfix</span><span class="tag">Correo</span></div>
+        <h3>Correo</h3>
+        <p>Zimbra y Postfix: soporte y fallas críticas.</p>
       </article>
       <article class="card">
         <span class="card-num">04</span>
-        <h3>Redes y conectividad</h3>
-        <p>Diseño e implementación de redes con certificaciones CCNP y MTCRE. Configuración avanzada de MikroTik y Cisco, cableado estructurado y telefonía IP.</p>
-        <div class="card-tags"><span class="tag">MikroTik</span><span class="tag">Cisco</span><span class="tag">CCNP</span><span class="tag">MTCRE</span></div>
+        <h3>Redes</h3>
+        <p>MikroTik y Cisco, cableado y telefonía IP. CCNP · MTCRE.</p>
       </article>
       <article class="card">
         <span class="card-num">05</span>
         <h3>Microsoft 365</h3>
-        <p>Migración e implementación completa. Correo, Teams, OneDrive y SharePoint corporativos configurados para que el equipo trabaje en un solo sitio.</p>
-        <div class="card-tags"><span class="tag">Microsoft 365</span><span class="tag">Teams</span><span class="tag">SharePoint</span></div>
+        <p>Migración de correo, Teams y SharePoint.</p>
       </article>
       <article class="card">
         <span class="card-num">06</span>
         <h3>Bases de datos</h3>
-        <p>Consultoría en SQL Server: optimización de consultas, monitoreo de rendimiento y esquemas de alta disponibilidad.</p>
-        <div class="card-tags"><span class="tag">SQL Server</span><span class="tag">Alta disponibilidad</span></div>
+        <p>SQL Server: rendimiento y alta disponibilidad.</p>
       </article>
-    </div>
-
-    <div class="grid grid-2 rv" style="margin-top:18px">
       <article class="card">
         <span class="card-num">07</span>
         <h3>Videovigilancia</h3>
-        <p>Diseño, instalación y normalización de sistemas de video vigilancia. Incluye puesta a punto de instalaciones existentes que quedaron a medias.</p>
-        <div class="card-tags"><span class="tag">Videovigilancia</span><span class="tag">Normalización</span></div>
+        <p>Instalación nueva o puesta a punto de la existente.</p>
       </article>
       <article class="card">
         <span class="card-num">08</span>
-        <h3>Ciberseguridad y respaldo</h3>
-        <p>Sistemas de respaldo con continuidad operativa real, recuperación ante secuestro de datos y endurecimiento de accesos.</p>
-        <div class="card-tags"><span class="tag">Respaldo</span><span class="tag">Continuidad</span></div>
+        <h3>Respaldo y seguridad</h3>
+        <p>Continuidad y recuperación ante secuestro de datos.</p>
       </article>
       <article class="card">
         <span class="card-num">09</span>
-        <h3>Licencias digitales</h3>
-        <p>Provisión de licencias legales y vigentes. Estabilidad y soporte del fabricante, sin sorpresas de cumplimiento.</p>
-        <div class="card-tags"><span class="tag">Licenciamiento</span></div>
+        <h3>Licencias</h3>
+        <p>Legales, vigentes y con soporte del fabricante.</p>
       </article>
       <article class="card">
         <span class="card-num">10</span>
-        <h3>Desarrollo web y Odoo</h3>
-        <p>Software a medida, sitios corporativos e implementación de módulos Odoo (web, calendarios, comercio electrónico).</p>
-        <div class="card-tags"><span class="tag">Odoo</span><span class="tag">Desarrollo web</span></div>
+        <h3>Web y Odoo</h3>
+        <p>Software a medida, sitios y módulos Odoo.</p>
       </article>
     </div>
     </div>
@@ -812,7 +811,7 @@ html.fx .sec{content-visibility:visible}
     <div class="sec-head rv">
       <span class="label">Estructura operativa</span>
       <h2>Cuando el problema no es el equipo, es que los sistemas no se hablan</h2>
-      <p>Hay empresas cuya infraestructura está sana y aun así el gerente pasa el día persiguiendo datos entre planillas. Eso no se arregla comprando servidores: se arregla ordenando el flujo. Cuatro puntos de entrada, según dónde esté hoy.</p>
+      <p>Si el gerente pasa el día persiguiendo datos entre planillas, no faltan servidores: falta ordenar el flujo. Cuatro puntos de entrada.</p>
     </div>
     <div class="arq-bar" aria-hidden="true"><i id="arqBar"></i></div>
     </div>
@@ -828,7 +827,6 @@ html.fx .sec{content-visibility:visible}
           <li>Inventario de sistemas, hojas de cálculo y puntos de carga manual</li>
           <li>Mapa de procesos por área y sus dependencias</li>
           <li>Hallazgos priorizados por impacto y esfuerzo</li>
-          <li>Informe ejecutivo con recomendación concreta</li>
         </ul>
         <a class="btn btn-solid" href="#contacto" data-svc="Diagnóstico profundo">Solicitar propuesta</a>
       </article>
@@ -842,7 +840,6 @@ html.fx .sec{content-visibility:visible}
           <li>Integración entre dos plataformas existentes</li>
           <li>Sincronización automática y registro de errores</li>
           <li>Tablero de control del flujo conectado</li>
-          <li>Documentación de operación y soporte inicial</li>
         </ul>
         <a class="btn btn-solid" href="#contacto" data-svc="Conector único">Solicitar propuesta</a>
       </article>
@@ -856,7 +853,6 @@ html.fx .sec{content-visibility:visible}
           <li>Documentación viva de procesos y sistemas</li>
           <li>Integración de los flujos críticos del negocio</li>
           <li>Tablero corporativo y protocolos directivos</li>
-          <li>Traspaso al equipo y estabilización posterior</li>
         </ul>
         <a class="btn btn-solid" href="#contacto" data-svc="Atlas documental">Solicitar propuesta</a>
       </article>
@@ -870,7 +866,6 @@ html.fx .sec{content-visibility:visible}
           <li>Centro de excelencia y catálogo único de requerimientos</li>
           <li>Formulario que captura el proceso y lo que cuesta hoy en horas</li>
           <li>Tablero de avance por área, estado y dependencias con sistemas</li>
-          <li>Acompañamiento para automatizar de verdad, no sólo documentar</li>
         </ul>
         <p class="lvl-proof">En marcha hoy en una cadena de retail: <b data-count>49 requerimientos</b> levantados en <b data-count>13 áreas</b>, <span data-count>62 %</span> de avance y <b data-count>117 horas por semana</b> devueltas al equipo — 29 medidas sobre proceso real y 88 estimadas.</p>
         <a class="btn btn-solid" href="#contacto" data-svc="Programa de citizen development">Solicitar propuesta</a>
@@ -891,7 +886,7 @@ html.fx .sec{content-visibility:visible}
     <div class="sec-head rv">
       <span class="label">Cómo trabajamos</span>
       <h2>Cuatro fases, en este orden</h2>
-      <p>No se automatiza un desorden: se ordena primero. Saltarse una fase es la razón más común por la que un proyecto de tecnología se cae a mitad de camino.</p>
+      <p>No se automatiza un desorden: primero se ordena.</p>
     </div>
 
     <div class="fases rv" id="fases">
@@ -901,25 +896,25 @@ html.fx .sec{content-visibility:visible}
           <span class="fase-dot"></span>
           <b>Fase 1</b>
           <h4>Lectura operativa</h4>
-          <p>Mapeo de lo que realmente pasa, no de lo que dice el manual. Auditoría de sistemas, procesos y puntos de falla.</p>
+          <p>Qué pasa de verdad, no lo que dice el manual.</p>
         </article>
         <article class="fase">
           <span class="fase-dot"></span>
           <b>Fase 2</b>
           <h4>Saneamiento</h4>
-          <p>Se corrige lo que está mal montado y se eliminan los errores de origen antes de construir encima.</p>
+          <p>Se corrige lo mal montado antes de construir encima.</p>
         </article>
         <article class="fase">
           <span class="fase-dot"></span>
           <b>Fase 3</b>
           <h4>Integración</h4>
-          <p>Los sistemas dejan de ser islas. Un solo flujo, una sola versión del dato para toda la dirección.</p>
+          <p>Un solo flujo y una sola versión del dato.</p>
         </article>
         <article class="fase">
           <span class="fase-dot"></span>
           <b>Fase 4</b>
           <h4>Automatización</h4>
-          <p>Lo repetitivo pasa a la máquina. Su equipo deja de consolidar planillas y vuelve al trabajo que sí requiere criterio.</p>
+          <p>Lo repetitivo pasa a la máquina; el equipo, al criterio.</p>
         </article>
       </div>
     </div>
@@ -932,7 +927,7 @@ html.fx .sec{content-visibility:visible}
     <div class="sec-head rv">
       <span class="label">Proyectos</span>
       <h2>Trabajo entregado</h2>
-      <p>Fotos de obra, sin retoque ni banco de imágenes: centros de datos, cableado, racks y videovigilancia instalados por nuestro equipo.</p>
+      <p>Fotos de obra reales, instaladas por nuestro equipo.</p>
     </div>
     <div class="proj-grid rail rv">
       <article class="proj proj--wide"><img src="assets/project/cctv1.jpg" alt="Monitor con las cámaras de videovigilancia de un ferry" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Videovigilancia a bordo</h4><span>Diseño, instalación y centro de monitoreo</span></div></article>
@@ -976,35 +971,36 @@ html.fx .sec{content-visibility:visible}
     <div class="sec-head rv">
       <span class="label">Clientes</span>
       <h2>Lo que dicen de nosotros</h2>
-      <p>Empresas e instituciones que nos confiaron su infraestructura, en sus palabras.</p>
+      <p>Empresas e instituciones que nos confiaron su infraestructura.</p>
     </div>
     <div class="tst-grid rail rv">
       <article class="tst">
         <p class="tst-q">“Soporte técnico excepcional. Soluciones rápidas y efectivas para nuestras necesidades tecnológicas.”</p>
-        <div class="tst-by"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><div><b>Navibus</b><span>Transporte</span></div></div>
+        <div class="tst-by"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><div><b>Navibus</b><span>Transporte</span></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Implementación de dominio y recuperación de infraestructura virtual.”</p>
-        <div class="tst-by"><img src="assets/logos/ld.jpg" alt="LD Palm Beach" loading="lazy"><div><b>LD Palm Beach</b><span>Hotelería</span></div></div>
+        <div class="tst-by"><img src="assets/logos/ld.jpg" alt="LD Palm Beach" loading="lazy"><div><b>LD Palm Beach</b><span>Hotelería</span></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Recuperación de archivos tras un ataque de secuestro de datos e implementación de un sistema de respaldo.”</p>
-        <div class="tst-by"><img src="assets/logos/bttravel.jpg" alt="BT Travel" loading="lazy"><div><b>BT Travel</b><span>Turismo</span></div></div>
+        <div class="tst-by"><img src="assets/logos/bttravel.jpg" alt="BT Travel" loading="lazy"><div><b>BT Travel</b><span>Turismo</span></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Instalación y normalización del sistema de videovigilancia. Excelente servicio y profesionalismo.”</p>
-        <div class="tst-by"><img src="assets/logos/sambil.jpg" alt="Sambil Margarita" loading="lazy"><div><b>Sambil Margarita</b><span>Centro comercial</span></div></div>
+        <div class="tst-by"><img src="assets/logos/sambil.jpg" alt="Sambil Margarita" loading="lazy"><div><b>Sambil Margarita</b><span>Centro comercial</span></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Implementación de un sistema de monitoreo para su infraestructura. Totalmente recomendados.”</p>
-        <div class="tst-by"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><div><b>Grupo Leiros</b><span>Corporativo</span></div></div>
+        <div class="tst-by"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><div><b>Grupo Leiros</b><span>Corporativo</span></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
-        <p class="tst-q">Plataforma consular en línea para los residentes españoles en Nueva Esparta: información de trámites y requisitos, solicitud de cita previa, línea de emergencias y centro de descargas. Un trabajo público que se puede visitar y verificar hoy.</p>
+        <p class="tst-q">Plataforma consular en línea: trámites, cita previa y emergencias. Trabajo público, verificable hoy.</p>
         <a class="tst-link" href="https://www.viceconsulado-nuevaesparta.com/" target="_blank" rel="noopener">Visitar el sitio →</a>
         <div class="tst-by">
           <img src="assets/logos/viceconsulado.webp" alt="Viceconsulado Honorario de España en Porlamar" loading="lazy" width="44" height="44">
           <div><b>Viceconsulado Honorario de España</b><span>Nueva Esparta · trabajo público</span></div>
+          <div class="tst-team" title="Christian Bracconi"><i>CB</i></div>
         </div>
       </article>
     </div>
@@ -1020,10 +1016,8 @@ html.fx .sec{content-visibility:visible}
     </div>
 
     <div class="about-txt rv">
-      <p>Geek Solutions es una empresa con <strong>más de 15 años</strong> ofreciendo productos y servicios tecnológicos, formada por especialistas en sistemas, servicios en AWS y Azure, gestión y monitoreo de centros de datos, desarrollo de aplicaciones y administración de bases de datos.</p>
-      <p>A eso se suma el frente de <strong>estructura operativa</strong>: indicadores de gestión, automatización de procesos y arquitectura de datos para empresas cuya operación creció más rápido que sus procesos.</p>
-      <p>Trabajamos desde Porlamar, Isla de Margarita, para clientes en toda Venezuela. <strong>Trabajamos de la mano: los frentes se reparten según el caso, no según el cargo.</strong></p>
-      <p>No preguntamos primero qué software usa. Preguntamos dónde se le está cayendo la operación.</p>
+      <p><strong>Más de 15 años</strong> en infraestructura, nube, centros de datos y bases de datos, más un frente de <strong>estructura operativa</strong>: indicadores, automatización y datos.</p>
+      <p>Desde Porlamar para toda Venezuela. <strong>Trabajamos de la mano: los frentes se reparten según el caso, no según el cargo.</strong></p>
     </div>
 
     <div class="team rail rv">
@@ -1041,14 +1035,14 @@ html.fx .sec{content-visibility:visible}
       </div>
       <div class="person">
         <span class="avatar" aria-hidden="true">JM</span>
-        <div><b>Juan Matute</b><span>Procesos y claridad operativa para dueños de negocio</span></div>
+        <div><b>Juan Matute</b><span>Análisis y visualización de datos, gestión de sistemas de datos y procesos de negocio</span></div>
       </div>
     </div>
 
     <div class="vals rail rv">
-      <div class="val"><span class="label">Misión</span><p>Proveer soluciones tecnológicas que impulsen la transformación digital de nuestros clientes, optimizando sus procesos y maximizando su productividad.</p></div>
-      <div class="val"><span class="label">Visión</span><p>Ser referencia en el mercado latinoamericano de servicios tecnológicos, reconocidos por excelencia técnica, innovación y compromiso con el resultado del cliente.</p></div>
-      <div class="val"><span class="label">Valores</span><p>Innovación, integridad, compromiso, trabajo en equipo y orientación al cliente guían cada proyecto que emprendemos.</p></div>
+      <div class="val"><span class="label">Misión</span><p>Tecnología que ordena los procesos del cliente y le devuelve productividad.</p></div>
+      <div class="val"><span class="label">Visión</span><p>Ser referencia latinoamericana en servicios tecnológicos por excelencia técnica.</p></div>
+      <div class="val"><span class="label">Valores</span><p>Integridad, compromiso, trabajo en equipo y foco en el cliente.</p></div>
     </div>
   </div>
 </section>
@@ -1064,15 +1058,15 @@ html.fx .sec{content-visibility:visible}
         <div class="ckl-pts">
           <div class="ckl-pt">
             <h4>Inventario real de lo que sostiene su empresa</h4>
-            <p>En una hora va a tener en un solo lugar qué servidores, licencias, correos y equipos mantienen su operación viva. La mayoría descubre aquí que paga por cosas que ya nadie usa.</p>
+            <p>En una hora, todo lo que mantiene viva su operación en un solo lugar.</p>
           </div>
           <div class="ckl-pt">
             <h4>Los tres riesgos que sí importan</h4>
-            <p>Respaldo, accesos y continuidad. Va a saber cuál de los tres tiene descubierto hoy y qué pasa exactamente el día que falle, sin necesidad de una auditoría.</p>
+            <p>Respaldo, accesos y continuidad: cuál tiene descubierto hoy.</p>
           </div>
           <div class="ckl-pt">
             <h4>Una rutina que sostiene el orden</h4>
-            <p>Quince minutos cada viernes. Esa revisión es lo que separa a las empresas que detectan un problema antes de que pare la operación de las que se enteran cuando ya paró.</p>
+            <p>Quince minutos cada viernes para detectar el problema antes de que pare todo.</p>
           </div>
         </div>
       </div>
