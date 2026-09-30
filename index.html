@@ -533,6 +533,7 @@ section[id],div[id]{scroll-margin-top:86px}
   }
   .rail[hidden]{display:none !important}
   .rail::-webkit-scrollbar{display:none}
+  .rail.is-driven{scroll-snap-type:none}
   .rail>*,.rail>.grid>.card{flex:0 0 84%;scroll-snap-align:start;min-width:0}
   /* servicios: las dos grillas se funden en una sola fila */
   .rail>.grid{display:contents}
@@ -978,11 +979,11 @@ html.fx .sec{content-visibility:visible}
         <div class="tst-by"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><div><b>Grupo Leiros</b><span>Corporativo</span></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
-        <p class="tst-q">Plataforma consular en línea: trámites, cita previa y emergencias. Trabajo público, verificable hoy.</p>
+        <p class="tst-q">Plataforma consular en línea.</p>
         <a class="tst-link" href="https://www.viceconsulado-nuevaesparta.com/" target="_blank" rel="noopener">Visitar el sitio →</a>
         <div class="tst-by">
           <img src="assets/logos/viceconsulado.webp" alt="Viceconsulado Honorario de España en Porlamar" loading="lazy" width="44" height="44">
-          <div><b>Viceconsulado Honorario de España</b><span>Nueva Esparta · trabajo público</span></div>
+          <div><b>Viceconsulado de España</b><span>Porlamar</span></div>
           <div class="tst-team" title="Christian Bracconi"><i>CB</i></div>
         </div>
       </article>
@@ -1665,6 +1666,37 @@ html.fx .sec{content-visibility:visible}
     window.addEventListener("load", schedule);
     update();
   });
+
+  /* ---------- móvil: al bajar la página, las fichas se deslizan solas ----------
+     El avance horizontal sigue al scroll vertical mientras el carrusel cruza la
+     pantalla. En cuanto el visitante lo toca, ese carrusel pasa a ser manual. */
+  (function(){
+    var mq = window.matchMedia("(max-width:760px)");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var rails = $$(".rail"), ticking = false;
+    rails.forEach(function(r){
+      r.addEventListener("touchstart", function(){
+        r.setAttribute("data-hand", ""); r.classList.remove("is-driven");
+      }, {passive:true});
+    });
+    function drive(){
+      ticking = false;
+      if (!mq.matches) return;
+      var vh = window.innerHeight;
+      rails.forEach(function(r){
+        if (r.hidden || r.hasAttribute("data-hand")) return;
+        var max = r.scrollWidth - r.clientWidth;
+        if (max <= 2) return;
+        var p = (vh * .85 - r.getBoundingClientRect().top) / (vh * .7);
+        r.classList.add("is-driven");
+        r.scrollLeft = Math.max(0, Math.min(1, p)) * max;
+      });
+    }
+    function tick(){ if (!ticking){ ticking = true; requestAnimationFrame(drive); } }
+    window.addEventListener("scroll", tick, {passive:true});
+    window.addEventListener("resize", tick, {passive:true});
+    drive();
+  })();
 
   /* ---------- preselección de servicio ---------- */
   $$("[data-svc]").forEach(function(a){
