@@ -394,7 +394,16 @@ section[id],div[id]{scroll-margin-top:86px}
 .tst-team>*+*{margin-left:-9px}
 .tst-team i{display:grid;place-items:center;font-style:normal;font-size:.68rem;font-weight:600;color:var(--accent-dk)}
 .tst-q b{font-weight:600}
-.tst-grid--cli{margin-top:18px}
+/* #prueba: proyectos y testimonios en un solo grid de 10 fichas */
+#prueba .tst-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (min-width:1181px){
+  #prueba .tst{padding:24px}
+  #prueba .tst-by{flex-wrap:wrap;gap:10px}
+  #prueba .tst-by>div:not(.tst-team){flex:1 1 80px}
+}
+@media (max-width:1180px){#prueba .tst-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:980px){#prueba .tst-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){#prueba .tst-grid{grid-template-columns:1fr}}
 .tst-link{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:600;color:var(--accent);margin-bottom:22px}
 @media (hover:hover){.tst-link:hover{text-decoration:underline}}
 
@@ -677,7 +686,7 @@ html.fx .sec{content-visibility:visible}
       <h2>Trabajo entregado</h2>
       <p>Proyectos del equipo que se pueden visitar o verificar, y clientes que nos confiaron su operación.</p>
     </div>
-    <div class="tst-grid rail rv">
+    <div class="tst-grid rv">
       <article class="tst">
         <p class="tst-q">Plataforma consular en línea.</p>
         <a class="tst-link" href="https://www.viceconsulado-nuevaesparta.com/" target="_blank" rel="noopener">Visitar el sitio →</a>
@@ -715,28 +724,25 @@ html.fx .sec{content-visibility:visible}
           <div><b>Latam Business School</b><span>Escuela de negocios · 2024 – 2025</span></div>
         </div>
       </article>
-    </div>
-
-    <div class="tst-grid tst-grid--cli rail rv">
       <article class="tst">
         <p class="tst-q">“Soporte técnico excepcional, con soluciones rápidas y efectivas.”</p>
-        <div class="tst-by"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><div><b>Navibus</b></div></div>
+        <div class="tst-by"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><div><b>Navibus</b></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Implementación de dominio y recuperación de infraestructura virtual.”</p>
-        <div class="tst-by"><img src="assets/logos/ld.jpg" alt="LD Palm Beach" loading="lazy"><div><b>LD Palm Beach</b></div></div>
+        <div class="tst-by"><img src="assets/logos/ld.jpg" alt="LD Palm Beach" loading="lazy"><div><b>LD Palm Beach</b></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Recuperación de archivos tras un secuestro de datos y sistema de respaldo.”</p>
-        <div class="tst-by"><img src="assets/logos/bttravel.jpg" alt="BT Travel" loading="lazy"><div><b>BT Travel</b></div></div>
+        <div class="tst-by"><img src="assets/logos/bttravel.jpg" alt="BT Travel" loading="lazy"><div><b>BT Travel</b></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Instalación y normalización de la videovigilancia. Excelente servicio.”</p>
-        <div class="tst-by"><img src="assets/logos/sambil.jpg" alt="Sambil Margarita" loading="lazy"><div><b>Sambil Margarita</b></div></div>
+        <div class="tst-by"><img src="assets/logos/sambil.jpg" alt="Sambil Margarita" loading="lazy"><div><b>Sambil Margarita</b></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
       <article class="tst">
         <p class="tst-q">“Sistema de monitoreo para su infraestructura. Totalmente recomendados.”</p>
-        <div class="tst-by"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><div><b>Grupo Leiros</b></div></div>
+        <div class="tst-by"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><div><b>Grupo Leiros</b></div><div class="tst-team" title="Amilcar Roa y Jesús Medina"><img src="assets/team-1.jpg" alt="Amilcar Roa" loading="lazy" width="30" height="30"><img src="assets/team-3.jpg" alt="Jesús Medina" loading="lazy" width="30" height="30"></div></div>
       </article>
     </div>
   </div>
