@@ -253,11 +253,6 @@ section[id],div[id]{scroll-margin-top:86px}
 .sec-head p{font-size:clamp(1rem,1.7vw,1.13rem);color:var(--gray);line-height:1.66}
 .sec-dark .sec-head p{color:rgba(255,255,255,.66)}
 
-/* ---------- frentes técnicos (chips bajo el hero) ---------- */
-.frentes{background:var(--black);border-top:1px solid var(--rule-dk);padding:22px var(--pad)}
-.frentes-in{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:1100px;margin:0 auto;list-style:none;padding:0}
-.frentes-in li{padding:7px 14px;border-radius:100px;border:1px solid var(--rule-dk);color:rgba(255,255,255,.78);font-size:.84rem;font-weight:500}
-
 /* ---------- carrusel de logos ---------- */
 .strip{background:var(--black);border-top:1px solid var(--rule-dk);padding:30px 0 34px;overflow:hidden}
 .strip-lbl{font-size:.84rem;color:var(--gray-lt);text-align:center;margin-bottom:22px}
@@ -286,6 +281,10 @@ section[id],div[id]{scroll-margin-top:86px}
 .grid-5{grid-template-columns:repeat(5,1fr)}
 @media (max-width:1100px){.grid-5{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:760px){.grid-5{grid-template-columns:repeat(2,1fr)}}
+#servicios .card{padding:clamp(20px,2.2vw,28px)}
+#servicios .card-num{margin-bottom:10px}
+#servicios .card h3{font-size:1.02rem;margin-bottom:6px}
+#servicios .card p{font-size:.88rem;line-height:1.55}
 .card{background:var(--white);padding:clamp(24px,3.2vw,40px);position:relative;transition:background .3s var(--ease)}
 .sec-alt .card{background:var(--paper)}
 .card-num{font-size:.8rem;font-weight:500;color:var(--gray-lt);display:block;margin-bottom:16px}
@@ -395,7 +394,6 @@ section[id],div[id]{scroll-margin-top:86px}
 .tst-team>*+*{margin-left:-9px}
 .tst-team i{display:grid;place-items:center;font-style:normal;font-size:.68rem;font-weight:600;color:var(--accent-dk)}
 .tst-q b{font-weight:600}
-#prueba .proj-grid{margin-top:18px}
 .cli-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:clamp(28px,4vw,44px)}
 @media (max-width:980px){.cli-grid{grid-template-columns:repeat(3,1fr)}}
 .cli{display:flex;flex-direction:column;gap:12px}
@@ -498,6 +496,7 @@ section[id],div[id]{scroll-margin-top:86px}
   .rail[hidden]{display:none !important}
   .rail::-webkit-scrollbar{display:none}
   .rail>*,.rail>.grid>.card{flex:0 0 84%;min-width:0}
+  /* servicios: las dos grillas se funden en una sola fila */
   .rail>.grid{display:contents}
   .rail .card{border:1px solid var(--rule);border-radius:16px;overflow:hidden}
   .rail .proj{flex-basis:80%;aspect-ratio:4/3}
@@ -620,6 +619,8 @@ html.fx .sec{content-visibility:visible}
     <div class="nav-links" id="navlinks">
       <a href="#prueba">Prueba verificable</a>
       <a href="#arquitectura">Estructura operativa</a>
+      <a href="#proyectos">Trabajo entregado</a>
+      <a href="#servicios">Servicios</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto" class="nav-cta">Contacto</a>
     </div>
@@ -657,11 +658,6 @@ html.fx .sec{content-visibility:visible}
     </div>
   </div>
 </section>
-
-<!-- ================= frentes técnicos ================= -->
-<div class="frentes" aria-label="Frentes técnicos">
-  <ul class="frentes-in"><li>Nube</li><li>Servidores</li><li>Correo</li><li>Redes</li><li>Microsoft 365</li><li>Bases de datos</li><li>Videovigilancia</li><li>Respaldo y seguridad</li><li>Licencias</li><li>Web y Odoo</li></ul>
-</div>
 
 <!-- ================= carrusel de logos ================= -->
 <div class="strip">
@@ -728,12 +724,6 @@ html.fx .sec{content-visibility:visible}
           <div class="tst-team" title="Juan Matute"><img src="assets/team-4.jpg" alt="Juan Matute" loading="lazy" width="30" height="30"></div>
         </div>
       </article>
-    </div>
-
-    <div class="proj-grid rail rv">
-      <article class="proj proj--wide"><img src="assets/project/cctv1.jpg" alt="Monitor con las cámaras de videovigilancia de un ferry" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Videovigilancia a bordo</h4><span>Diseño, instalación y centro de monitoreo</span></div></article>
-      <article class="proj"><img src="assets/project/project-2.jpg" alt="Centro de datos" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Centro de datos</h4><span>Diseño y arquitectura</span></div></article>
-      <article class="proj"><img src="assets/project/project-3.jpg" alt="Cableado estructurado en racks" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cableado estructurado</h4><span>Ordenamiento e instalación</span></div></article>
     </div>
 
     <div class="cli-grid rail rv">
@@ -814,6 +804,92 @@ html.fx .sec{content-visibility:visible}
     <p class="arq-fine rv">
       Cada propuesta se cotiza sobre el alcance real. Licencias, interfaces de terceros y consumo de nube van por presupuesto aparte y se detallan antes de firmar.
     </p>
+  </div>
+</section>
+
+<!-- ================= proyectos ================= -->
+<section class="sec" id="proyectos">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="label">Proyectos</span>
+      <h2>Trabajo entregado</h2>
+      <p>Fotos de obra reales, instaladas por nuestro equipo.</p>
+    </div>
+    <div class="proj-grid rail rv">
+      <article class="proj proj--wide"><img src="assets/project/cctv1.jpg" alt="Monitor con las cámaras de videovigilancia de un ferry" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Videovigilancia a bordo</h4><span>Diseño, instalación y centro de monitoreo</span></div></article>
+      <article class="proj"><img src="assets/project/project-2.jpg" alt="Centro de datos" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Centro de datos</h4><span>Diseño y arquitectura</span></div></article>
+      <article class="proj"><img src="assets/project/project-3.jpg" alt="Cableado estructurado en racks" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cableado estructurado</h4><span>Ordenamiento e instalación</span></div></article>
+      <article class="proj"><img src="assets/project/project-4.jpg" alt="Gabinetes de servidores" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Servidores</h4><span>Instalación y soporte</span></div></article>
+      <article class="proj"><img src="assets/project/red.jpg" alt="Técnico revisando un rack de comunicaciones" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Comunicaciones</h4><span>Instalación en sitio</span></div></article>
+      <article class="proj"><img src="assets/project/sbl1.jpg" alt="Rack de distribución con UPS" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Racks</h4><span>Instalación y cableado</span></div></article>
+      <article class="proj"><img src="assets/project/nav2.jpg" alt="Cámara exterior instalada en un barco" loading="lazy" width="660" height="440"><div class="proj-cap"><h4>Cámaras exteriores</h4><span>Instalación marina</span></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= servicios ================= -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="label">Servicios</span>
+      <h2>Lo que mantenemos funcionando</h2>
+      <p>Diez frentes técnicos que sostienen la operación diaria. Nos hacemos cargo de que estén bien montados y sigan en pie.</p>
+    </div>
+
+    <div class="svc rail" data-rail-items=".card">
+    <div class="grid grid-5 rv">
+      <article class="card">
+        <span class="card-num">01</span>
+        <h3>Nube</h3>
+        <p>AWS y Azure: diseño, monitoreo y facturación bajo control.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">02</span>
+        <h3>Servidores</h3>
+        <p>Windows Server, Linux, Active Directory y centros de datos.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">03</span>
+        <h3>Correo</h3>
+        <p>Zimbra y Postfix: soporte y fallas críticas.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">04</span>
+        <h3>Redes</h3>
+        <p>MikroTik y Cisco, cableado y telefonía IP. CCNP · MTCRE.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">05</span>
+        <h3>Microsoft 365</h3>
+        <p>Migración de correo, Teams y SharePoint.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">06</span>
+        <h3>Bases de datos</h3>
+        <p>SQL Server: rendimiento y alta disponibilidad.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">07</span>
+        <h3>Videovigilancia</h3>
+        <p>Instalación nueva o puesta a punto de la existente.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">08</span>
+        <h3>Respaldo y seguridad</h3>
+        <p>Continuidad y recuperación ante secuestro de datos.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">09</span>
+        <h3>Licencias</h3>
+        <p>Legales, vigentes y con soporte del fabricante.</p>
+      </article>
+      <article class="card">
+        <span class="card-num">10</span>
+        <h3>Web y Odoo</h3>
+        <p>Software a medida, sitios y módulos Odoo.</p>
+      </article>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -1215,6 +1291,14 @@ html.fx .sec{content-visibility:visible}
         });
       });
     }
+
+    /* servicios: las fichas suben en cascada según avanza el scroll */
+    $$("#servicios .grid").forEach(function(g){
+      gsap.from($$(".card", g), {
+        opacity:0, y:36, stagger:.08, ease:"power2.out",
+        scrollTrigger:{trigger:g, start:"top 88%", end:"top 45%", scrub:.5}
+      });
+    });
 
     /* estructura operativa: el panel oscuro crece desde una tarjeta
        redondeada hasta toda la pantalla, se fija, y los 4 niveles
