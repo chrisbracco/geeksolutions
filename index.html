@@ -394,11 +394,7 @@ section[id],div[id]{scroll-margin-top:86px}
 .tst-team>*+*{margin-left:-9px}
 .tst-team i{display:grid;place-items:center;font-style:normal;font-size:.68rem;font-weight:600;color:var(--accent-dk)}
 .tst-q b{font-weight:600}
-.cli-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:clamp(28px,4vw,44px)}
-@media (max-width:980px){.cli-grid{grid-template-columns:repeat(3,1fr)}}
-.cli{display:flex;flex-direction:column;gap:12px}
-.cli img{width:44px;height:44px;border-radius:9px;object-fit:contain;background:var(--off-white);padding:4px}
-.cli p{font-size:.88rem;line-height:1.55;color:var(--gray)}
+.tst-grid--cli{margin-top:18px}
 .tst-link{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:600;color:var(--accent);margin-bottom:22px}
 @media (hover:hover){.tst-link:hover{text-decoration:underline}}
 
@@ -721,12 +717,27 @@ html.fx .sec{content-visibility:visible}
       </article>
     </div>
 
-    <div class="cli-grid rail rv">
-      <div class="cli"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><p>“Soporte técnico excepcional, con soluciones rápidas y efectivas.”</p></div>
-      <div class="cli"><img src="assets/logos/ld.jpg" alt="LD Palm Beach" loading="lazy"><p>“Implementación de dominio y recuperación de infraestructura virtual.”</p></div>
-      <div class="cli"><img src="assets/logos/bttravel.jpg" alt="BT Travel" loading="lazy"><p>“Recuperación de archivos tras un secuestro de datos y sistema de respaldo.”</p></div>
-      <div class="cli"><img src="assets/logos/sambil.jpg" alt="Sambil Margarita" loading="lazy"><p>“Instalación y normalización de la videovigilancia. Excelente servicio.”</p></div>
-      <div class="cli"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><p>“Sistema de monitoreo para su infraestructura. Totalmente recomendados.”</p></div>
+    <div class="tst-grid tst-grid--cli rail rv">
+      <article class="tst">
+        <p class="tst-q">“Soporte técnico excepcional, con soluciones rápidas y efectivas.”</p>
+        <div class="tst-by"><img src="assets/logos/navibus.jpg" alt="Navibus" loading="lazy"><div><b>Navibus</b></div></div>
+      </article>
+      <article class="tst">
+        <p class="tst-q">“Implementación de dominio y recuperación de infraestructura virtual.”</p>
+        <div class="tst-by"><img src="assets/logos/ld.jpg" alt="LD Palm Beach" loading="lazy"><div><b>LD Palm Beach</b></div></div>
+      </article>
+      <article class="tst">
+        <p class="tst-q">“Recuperación de archivos tras un secuestro de datos y sistema de respaldo.”</p>
+        <div class="tst-by"><img src="assets/logos/bttravel.jpg" alt="BT Travel" loading="lazy"><div><b>BT Travel</b></div></div>
+      </article>
+      <article class="tst">
+        <p class="tst-q">“Instalación y normalización de la videovigilancia. Excelente servicio.”</p>
+        <div class="tst-by"><img src="assets/logos/sambil.jpg" alt="Sambil Margarita" loading="lazy"><div><b>Sambil Margarita</b></div></div>
+      </article>
+      <article class="tst">
+        <p class="tst-q">“Sistema de monitoreo para su infraestructura. Totalmente recomendados.”</p>
+        <div class="tst-by"><img src="assets/logos/testimonial-2.jpg" alt="Grupo Leiros" loading="lazy"><div><b>Grupo Leiros</b></div></div>
+      </article>
     </div>
   </div>
 </section>
