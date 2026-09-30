@@ -1184,16 +1184,25 @@ html.fx .sec{content-visibility:visible}
       });
     }
 
-    /* contadores: cuentan desde cero la primera vez que se ven */
+    /* contadores: cuentan desde cero la primera vez que se ven. La cifra real
+       se queda en el HTML hasta que el disparador arranca la cuenta, y al
+       terminar se restaura tal cual: si el disparador no llega a correr, se ve
+       el número verdadero y nunca un cero. */
     $$("[data-count]").forEach(function(el){
-      var m = el.textContent.match(/^(\D*?)(\d[\d.,]*)(.*)$/);
+      var txt = el.textContent;
+      var m = txt.match(/^(\D*?)(\d[\d.,]*)(.*)$/);
       if (!m) return;
-      var end = parseFloat(m[2].replace(/\./g,"").replace(",", ".")), o = {v:0};
-      el.textContent = m[1] + "0" + m[3];
-      gsap.to(o, {
-        v:end, duration:2.2, ease:"power3.out",
-        onUpdate:function(){ el.textContent = m[1] + Math.round(o.v).toLocaleString("es-VE") + m[3]; },
-        scrollTrigger:{trigger:el, start:"top 92%", once:true}
+      var end = parseFloat(m[2].replace(/\./g,"").replace(",", "."));
+      ScrollTrigger.create({
+        trigger:el, start:"top 92%", once:true,
+        onEnter:function(){
+          var o = {v:0};
+          gsap.to(o, {
+            v:end, duration:2.2, ease:"power3.out",
+            onUpdate:function(){ el.textContent = m[1] + Math.round(o.v).toLocaleString("es-VE") + m[3]; },
+            onComplete:function(){ el.textContent = txt; }
+          });
+        }
       });
     });
 
