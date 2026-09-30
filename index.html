@@ -516,44 +516,11 @@ section[id],div[id]{scroll-margin-top:86px}
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}
 }
 
-/* ---------- carruseles en móvil ----------
-   En escritorio cada bloque sigue siendo su grilla. Bajo 760 px las grillas largas
-   se vuelven una fila que se desliza con el dedo, como las fichas de precios:
-   se ve la siguiente asomando por la derecha y la página deja de ser un pasillo. */
+/* ---------- bloques .rail en móvil ----------
+   Bajo 760 px cada bloque conserva su propia grilla responsiva (1-2 columnas) y
+   la página se recorre solo en vertical: sin carrusel lateral ni scroll-snap. */
 .rail-meter{display:none}
 @media (max-width:760px){
-  .rail{
-    display:flex !important;gap:12px;
-    overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
-    scroll-padding-left:var(--pad);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
-    margin-left:calc(var(--pad) * -1);margin-right:calc(var(--pad) * -1);
-    padding:4px var(--pad) 8px;
-    background:none;border:0;border-radius:0;
-    scrollbar-width:none
-  }
-  .rail[hidden]{display:none !important}
-  .rail::-webkit-scrollbar{display:none}
-  .rail.is-driven{scroll-snap-type:none}
-  .rail>*,.rail>.grid>.card{flex:0 0 84%;scroll-snap-align:start;min-width:0}
-  /* servicios: las dos grillas se funden en una sola fila */
-  .rail>.grid{display:contents}
-  .rail .card{border:1px solid var(--rule);border-radius:16px;overflow:hidden}
-  .rail .proj{flex-basis:80%;aspect-ratio:4/3}
-  .rail .prod{flex-basis:62%}
-  /* testimonios y equipo: cada ficha a su altura, sin estirarse a la más larga */
-  .tst-grid.rail,.team.rail{align-items:flex-start}
-  .rail .tst-q{flex:none}
-  .rail .person{flex-basis:80%;flex-direction:row;align-items:center}
-  .rail .val{flex-basis:80%;border:1px solid var(--rule);border-radius:16px}
-  .vals.rail{margin-top:36px}
-
-  .rail-meter{display:flex;align-items:center;gap:14px;margin-top:14px}
-  .rail-meter i{flex:1;height:2px;border-radius:2px;background:var(--gray-xlt);position:relative;overflow:hidden}
-  .rail-meter b{position:absolute;top:0;bottom:0;left:0;border-radius:2px;background:var(--accent);transition:left .12s linear}
-  .rail-meter span{font-size:.8rem;font-weight:500;color:var(--gray-lt);font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
-  .sec-dark .rail-meter i{background:var(--rule-dk)}
-  .sec-dark .rail-meter b{background:var(--accent-bright)}
-
   /* las categorías de la tienda también se deslizan, en una sola línea */
   .shop-cats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:calc(var(--pad) * -1);margin-right:calc(var(--pad) * -1);padding:0 var(--pad) 2px}
   .shop-cats::-webkit-scrollbar{display:none}
@@ -1666,37 +1633,6 @@ html.fx .sec{content-visibility:visible}
     window.addEventListener("load", schedule);
     update();
   });
-
-  /* ---------- móvil: al bajar la página, las fichas se deslizan solas ----------
-     El avance horizontal sigue al scroll vertical mientras el carrusel cruza la
-     pantalla. En cuanto el visitante lo toca, ese carrusel pasa a ser manual. */
-  (function(){
-    var mq = window.matchMedia("(max-width:760px)");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var rails = $$(".rail"), ticking = false;
-    rails.forEach(function(r){
-      r.addEventListener("touchstart", function(){
-        r.setAttribute("data-hand", ""); r.classList.remove("is-driven");
-      }, {passive:true});
-    });
-    function drive(){
-      ticking = false;
-      if (!mq.matches) return;
-      var vh = window.innerHeight;
-      rails.forEach(function(r){
-        if (r.hidden || r.hasAttribute("data-hand")) return;
-        var max = r.scrollWidth - r.clientWidth;
-        if (max <= 2) return;
-        var p = (vh * .85 - r.getBoundingClientRect().top) / (vh * .7);
-        r.classList.add("is-driven");
-        r.scrollLeft = Math.max(0, Math.min(1, p)) * max;
-      });
-    }
-    function tick(){ if (!ticking){ ticking = true; requestAnimationFrame(drive); } }
-    window.addEventListener("scroll", tick, {passive:true});
-    window.addEventListener("resize", tick, {passive:true});
-    drive();
-  })();
 
   /* ---------- preselección de servicio ---------- */
   $$("[data-svc]").forEach(function(a){
